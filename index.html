@@ -1,0 +1,2326 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quiz de positionnement Cybersécurité Médiateur Numérique</title>
+<meta name="description" content="Quiz de positionnement Ondea Web : 15 questions de cybersécurité pour les médiateurs numériques (RNCP 40695) : arnaques, mots de passe et accompagnement des publics.">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231e3a8a'/%3E%3Cpath d='M24 20 12 32l12 12M40 20l12 12-12 12' fill='none' stroke='%23ffffff' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+
+<!-- Génération du bilan PDF (si la bibliothèque ne se charge pas, la page propose l'impression en PDF) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+
+<style>
+/* =====================================================================
+   QUIZ DE POSITIONNEMENT CYBERSÉCURITÉ · MÉDIATEUR NUMÉRIQUE — Ondea Web
+   Même système que le mini-cours : variables --mc-*, classes mc-*,
+   chaque règle commence par .mc pour rester isolée.
+   ===================================================================== */
+:root{
+  --mc-scale:1;
+  --mc-bg:#f4f6fa; --mc-surface:#ffffff; --mc-surface-2:#eef2f8; --mc-border:#94a3b8;
+  --mc-text:#0b1220; --mc-muted:#334155; --mc-accent:#1e3a8a; --mc-accent-strong:#1d4ed8; --mc-on-accent:#ffffff;
+  --mc-success:#064e3b; --mc-success-bg:#d1fae5; --mc-warn:#7c2d12; --mc-warn-bg:#ffedd5; --mc-danger:#991b1b; --mc-danger-bg:#fee2e2;
+  --mc-track:#cbd5e1; --mc-focus:#b45309; --mc-shadow:0 1px 2px rgba(15,23,42,.08),0 8px 24px rgba(15,23,42,.06);
+  --mc-code-bg:#e2e8f0; --mc-bw:1px;
+  --mc-html:#9a3412; --mc-html-bg:#ffedd5; --mc-css:#1e40af; --mc-css-bg:#dbeafe; --mc-js:#713f12; --mc-js-bg:#fef9c3;
+  --mc-font:"Atkinson Hyperlegible",Verdana,Tahoma,Arial,sans-serif;
+  --mc-mono:"IBM Plex Mono",ui-monospace,Consolas,"Courier New",monospace;
+  color-scheme:light;
+  font-size:calc(125% * var(--mc-scale));
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]):not([data-mc-theme="light"]){
+    --mc-bg:#0a0f1c; --mc-surface:#121a2c; --mc-surface-2:#1a2438; --mc-border:#64748b;
+    --mc-text:#f8fafc; --mc-muted:#cbd5e1; --mc-accent:#93c5fd; --mc-accent-strong:#bfdbfe; --mc-on-accent:#0a0f1c;
+    --mc-success:#6ee7b7; --mc-success-bg:#022c22; --mc-warn:#fdba74; --mc-warn-bg:#431407; --mc-danger:#fca5a5; --mc-danger-bg:#450a0a;
+    --mc-track:#334155; --mc-focus:#fcd34d; --mc-shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+    --mc-code-bg:#0f172a;
+    --mc-html:#fdba74; --mc-html-bg:#431407; --mc-css:#93c5fd; --mc-css-bg:#172554; --mc-js:#fde047; --mc-js-bg:#422006;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]:not([data-mc-theme="light"]),
+:root[data-mc-theme="dark"]{
+  --mc-bg:#0a0f1c; --mc-surface:#121a2c; --mc-surface-2:#1a2438; --mc-border:#64748b;
+  --mc-text:#f8fafc; --mc-muted:#cbd5e1; --mc-accent:#93c5fd; --mc-accent-strong:#bfdbfe; --mc-on-accent:#0a0f1c;
+  --mc-success:#6ee7b7; --mc-success-bg:#022c22; --mc-warn:#fdba74; --mc-warn-bg:#431407; --mc-danger:#fca5a5; --mc-danger-bg:#450a0a;
+  --mc-track:#334155; --mc-focus:#fcd34d; --mc-shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+  --mc-code-bg:#0f172a;
+  --mc-html:#fdba74; --mc-html-bg:#431407; --mc-css:#93c5fd; --mc-css-bg:#172554; --mc-js:#fde047; --mc-js-bg:#422006;
+  color-scheme:dark;
+}
+:root[data-mc-contrast="high"][data-mc-scheme="light"]{
+  --mc-bg:#ffffff; --mc-surface:#ffffff; --mc-surface-2:#eef2f7; --mc-border:#1f2937;
+  --mc-text:#000000; --mc-muted:#111827; --mc-accent:#172554; --mc-accent-strong:#1e3a8a;
+  --mc-success:#022c22; --mc-warn:#5a1a05; --mc-danger:#7f1d1d; --mc-track:#94a3b8; --mc-focus:#9a3412; --mc-bw:2px;
+  --mc-html:#7c2d12; --mc-css:#172554; --mc-js:#422006;
+}
+:root[data-mc-contrast="high"][data-mc-scheme="dark"]{
+  --mc-bg:#000000; --mc-surface:#0b0f19; --mc-surface-2:#151c2c; --mc-border:#e5e7eb;
+  --mc-text:#ffffff; --mc-muted:#f1f5f9; --mc-accent:#bfdbfe; --mc-accent-strong:#dbeafe;
+  --mc-success:#a7f3d0; --mc-warn:#fed7aa; --mc-danger:#fecaca; --mc-track:#475569; --mc-focus:#fde047; --mc-bw:2px;
+  --mc-html:#fed7aa; --mc-css:#bfdbfe; --mc-js:#fef08a;
+}
+:root[data-mc-contrast="max"][data-mc-scheme="light"]{
+  --mc-bg:#ffffff; --mc-surface:#ffffff; --mc-surface-2:#ffffff; --mc-border:#000000;
+  --mc-text:#000000; --mc-muted:#000000; --mc-accent:#000000; --mc-accent-strong:#000000; --mc-on-accent:#ffffff;
+  --mc-success:#000000; --mc-success-bg:#ffffff; --mc-warn:#000000; --mc-warn-bg:#ffffff; --mc-danger:#000000; --mc-danger-bg:#ffffff;
+  --mc-track:#ffffff; --mc-focus:#c2410c; --mc-code-bg:#ffffff; --mc-shadow:none; --mc-bw:3px;
+  --mc-html:#000000; --mc-html-bg:#ffffff; --mc-css:#000000; --mc-css-bg:#ffffff; --mc-js:#000000; --mc-js-bg:#ffffff;
+}
+:root[data-mc-contrast="max"][data-mc-scheme="dark"]{
+  --mc-bg:#000000; --mc-surface:#000000; --mc-surface-2:#000000; --mc-border:#ffffff;
+  --mc-text:#ffffff; --mc-muted:#ffffff; --mc-accent:#ffff00; --mc-accent-strong:#ffff00; --mc-on-accent:#000000;
+  --mc-success:#00ff66; --mc-success-bg:#000000; --mc-warn:#ffb000; --mc-warn-bg:#000000; --mc-danger:#ff6b6b; --mc-danger-bg:#000000;
+  --mc-track:#000000; --mc-focus:#00ffff; --mc-code-bg:#000000; --mc-shadow:none; --mc-bw:3px;
+  --mc-html:#ffb000; --mc-html-bg:#000000; --mc-css:#00ffff; --mc-css-bg:#000000; --mc-js:#ffff00; --mc-js-bg:#000000;
+}
+
+/* ---------- socle ---------- */
+html body{margin:0;background:var(--mc-bg);color:var(--mc-text);overflow-x:clip}
+.mc{background:var(--mc-bg);color:var(--mc-text);font-family:var(--mc-font);font-size:1rem;font-weight:400;line-height:1.65;text-align:left;min-height:100vh;-webkit-text-size-adjust:100%}
+.mc *,.mc *::before,.mc *::after{box-sizing:border-box}
+.mc h1,.mc h2,.mc h3,.mc h4,.mc legend{margin:0;padding:0;font-family:var(--mc-font);font-weight:700;line-height:1.25;color:inherit;text-wrap:balance;overflow-wrap:break-word}
+.mc p,.mc li{margin:0;overflow-wrap:break-word}
+.mc ul,.mc ol{margin:0}
+.mc a{color:var(--mc-accent);text-decoration:underline}
+.mc button,.mc input{font-family:inherit}
+.mc fieldset{margin:0;min-width:0;border:0;padding:0}
+.mc legend{float:none;width:100%}
+.mc code{font-family:var(--mc-mono);background:var(--mc-code-bg);color:var(--mc-text);padding:.05em .35em;border-radius:.3em;font-size:.92em;overflow-wrap:anywhere}
+.mc svg{vertical-align:middle}
+.mc [hidden]{display:none!important}
+.mc :focus-visible{outline:.22rem solid var(--mc-focus);outline-offset:.18rem;border-radius:.3rem}
+.mc ::selection{background:var(--mc-accent);color:var(--mc-on-accent)}
+.mc .mc-skip{position:absolute;left:1rem;top:-10rem;background:var(--mc-accent);color:var(--mc-on-accent);padding:.7rem 1rem;border-radius:.5rem;z-index:100;font-weight:700}
+.mc .mc-skip:focus{top:1rem}
+.mc .mc-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- barre d'outils ---------- */
+.mc .mc-bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--mc-surface) 94%,transparent);backdrop-filter:blur(10px);border-bottom:var(--mc-bw) solid var(--mc-border)}
+.mc .mc-bar-in{max-width:78rem;margin:0 auto;padding:.6rem 1rem;display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:center;justify-content:space-between}
+.mc .mc-brand{display:flex;align-items:center;gap:.6rem;font-weight:700}
+.mc .mc-brand-mark{display:grid;place-items:center;width:2.2rem;height:2.2rem;border-radius:.6rem;background:var(--mc-accent);color:var(--mc-on-accent);font-size:.9rem;font-family:var(--mc-mono)}
+.mc .mc-tools{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+.mc .mc-group{display:flex;align-items:center;gap:.25rem;background:var(--mc-surface-2);border:1px solid var(--mc-border);border-radius:.7rem;padding:.2rem}
+.mc .mc-btn{font:inherit;font-weight:700;font-size:1rem;line-height:1.2;min-height:2.75rem;min-width:2.75rem;padding:.35rem .8rem;border-radius:.55rem;border:2px solid transparent;background:transparent;color:var(--mc-text);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:.4rem;text-decoration:none}
+.mc .mc-btn:hover{background:var(--mc-surface);border-color:var(--mc-border)}
+.mc .mc-btn[disabled]{opacity:.45;cursor:not-allowed}
+.mc .mc-btn-solid{background:var(--mc-accent);color:var(--mc-on-accent)}
+.mc .mc-btn-solid:hover{background:var(--mc-accent-strong);color:var(--mc-on-accent);border-color:transparent}
+.mc .mc-btn-solid[aria-disabled="true"]{background:var(--mc-surface-2);color:var(--mc-muted);border-color:var(--mc-border);cursor:not-allowed}
+.mc .mc-btn-line{border-color:var(--mc-border);background:var(--mc-surface)}
+.mc .mc-btn-warn{border-color:var(--mc-warn);color:var(--mc-warn);background:var(--mc-surface)}
+.mc .mc-btn-warn:hover{background:var(--mc-warn-bg);border-color:var(--mc-warn);color:var(--mc-warn)}
+.mc .mc-btn-lg{min-height:3.2rem;padding:.6rem 1.4rem;font-size:1.1rem;border-radius:.7rem}
+.mc .mc-zoom-val{white-space:nowrap;min-width:3.6rem}
+.mc svg.mc-i{width:1.15em;height:1.15em;flex:none}
+
+.mc .mc-clock{display:inline-flex;align-items:center;gap:.55rem;min-height:2.75rem;padding:.3rem .9rem;background:var(--mc-surface-2);border:var(--mc-bw) solid var(--mc-border);border-radius:.7rem;font-family:var(--mc-mono);font-weight:600;font-size:1.1rem;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap}
+.mc .mc-clock svg{width:1.15em;height:1.15em;color:var(--mc-accent)}
+.mc .mc-clock-date{font-family:var(--mc-font);font-weight:700;font-size:.9em;color:var(--mc-muted);padding-right:.55rem;border-right:2px solid var(--mc-border)}
+.mc .mc-clock-s{color:var(--mc-accent)}
+.mc .mc-clock-sep{animation:mcBlink 1s steps(1) infinite}
+@keyframes mcBlink{50%{opacity:.35}}
+@media (max-width:106rem){.mc .mc-clock-date{display:none}}
+@media (min-width:64rem) and (max-width:90rem){.mc .mc-brand .mc-full{display:none}.mc #mc-contrastBtn .mc-txt{display:none}}
+
+.mc .mc-nojs{margin:1.2rem 0 0;padding:.9rem 1.1rem;border-radius:.8rem;border:2px solid var(--mc-warn);background:var(--mc-warn-bg)}
+.mc .mc-nojs b{color:var(--mc-warn)}
+
+/* ---------- en-tête ---------- */
+.mc .mc-main{max-width:62rem;margin:0 auto;padding:0 1rem 4rem}
+.mc .mc-hero{padding:2.5rem 0 1.2rem;display:grid;gap:1.3rem}
+.mc .mc-kicker{font-weight:700;color:var(--mc-accent);letter-spacing:.06em;text-transform:uppercase;font-size:.95rem}
+.mc .mc-hero h1{font-size:clamp(1.9rem,4.2vw,2.8rem);margin:.3rem 0 .6rem}
+.mc .mc-lead{color:var(--mc-muted);font-size:1.12rem;max-width:62ch}
+.mc .mc-word{font-family:var(--mc-mono);font-weight:600;padding:0 .2em;border-radius:.25em}
+.mc .mc-word.mc-l-html{color:var(--mc-html);background:var(--mc-html-bg)}
+.mc .mc-word.mc-l-css{color:var(--mc-css);background:var(--mc-css-bg)}
+.mc .mc-word.mc-l-js{color:var(--mc-js);background:var(--mc-js-bg)}
+.mc .mc-facts{display:grid;gap:.8rem;grid-template-columns:repeat(auto-fit,minmax(min(12rem,100%),1fr));list-style:none;padding:0}
+.mc .mc-fact{padding:.9rem 1rem;display:grid;gap:.15rem}
+.mc .mc-fact b{font-size:1.6rem;line-height:1.1;font-variant-numeric:tabular-nums;color:var(--mc-accent)}
+.mc .mc-fact span{color:var(--mc-muted);font-size:.98rem}
+
+/* étapes */
+.mc .mc-steps{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;padding:0;margin:.4rem 0 1.2rem}
+.mc .mc-steps li{display:flex;align-items:center;gap:.5rem;padding:.4rem .9rem .4rem .45rem;border-radius:99rem;border:var(--mc-bw) solid var(--mc-border);background:var(--mc-surface);font-weight:700;color:var(--mc-muted)}
+.mc .mc-steps li span{display:grid;place-items:center;width:1.9rem;height:1.9rem;border-radius:50%;background:var(--mc-surface-2);border:2px solid var(--mc-border);font-family:var(--mc-mono);font-size:.9rem}
+.mc .mc-steps li.mc-on{color:var(--mc-text);border-color:var(--mc-accent)}
+.mc .mc-steps li.mc-on span{background:var(--mc-accent);border-color:var(--mc-accent);color:var(--mc-on-accent)}
+.mc .mc-steps li.mc-past span{background:var(--mc-success-bg);border-color:var(--mc-success);color:var(--mc-success)}
+
+/* cartes */
+.mc .mc-card{background:var(--mc-surface);color:var(--mc-text);border:var(--mc-bw) solid var(--mc-border);border-radius:1rem;box-shadow:var(--mc-shadow)}
+.mc .mc-block{padding:1.5rem;display:grid;gap:1.1rem}
+.mc .mc-block > h2,.mc .mc-h2{font-size:1.45rem}
+.mc .mc-sub{color:var(--mc-muted);max-width:66ch}
+.mc .mc-note{font-size:.98rem;color:var(--mc-muted)}
+.mc .mc-stack{display:grid;gap:1.25rem}
+
+/* identification */
+.mc .mc-rules{margin:0;padding:0;list-style:none;display:grid;gap:.5rem}
+.mc .mc-rules li{display:flex;gap:.7rem;align-items:flex-start;padding:.6rem .8rem;border-radius:.7rem;background:var(--mc-surface-2);border:var(--mc-bw) solid var(--mc-border)}
+.mc .mc-rules svg{color:var(--mc-accent);margin-top:.2rem}
+.mc .mc-fields{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(min(16rem,100%),1fr))}
+.mc .mc-field{display:grid;gap:.35rem;align-content:start}
+.mc .mc-field label{font-weight:700;font-size:1.05rem}
+.mc .mc-field label abbr{text-decoration:none;color:var(--mc-danger);margin-left:.15rem}
+.mc .mc-field input{font-size:1.15rem;min-height:3.1rem;padding:.5rem .9rem;border-radius:.65rem;border:2px solid var(--mc-border);background:var(--mc-surface);color:var(--mc-text);width:100%}
+.mc .mc-field input:focus-visible{border-color:var(--mc-accent);outline-offset:.1rem}
+.mc .mc-field input[aria-invalid="true"]{border-color:var(--mc-danger);background:var(--mc-danger-bg)}
+.mc .mc-field input.mc-valid{border-color:var(--mc-success)}
+.mc .mc-err{color:var(--mc-danger);font-weight:700;font-size:.98rem;min-height:1.5em}
+.mc .mc-start{display:flex;flex-wrap:wrap;gap:.8rem 1.2rem;align-items:center}
+
+/* compteur et question */
+.mc .mc-qhead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.5rem 1rem}
+.mc .mc-qcount{font-weight:700;font-size:1.05rem}
+.mc .mc-qcount b{font-family:var(--mc-mono);font-size:1.2rem}
+.mc .mc-live{color:var(--mc-muted);font-weight:700}
+.mc .mc-live b{color:var(--mc-text)}
+.mc .mc-meter{height:1rem;background:var(--mc-track);border-radius:99rem;overflow:hidden;border:1px solid var(--mc-border)}
+.mc .mc-meter>span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--mc-accent),var(--mc-success));border-radius:inherit;transition:width .4s ease}
+.mc .mc-badge{display:inline-block;font-size:.9rem;font-weight:700;line-height:1.5;padding:.15rem .6rem;border-radius:99rem;border:1px solid var(--mc-border);background:var(--mc-surface-2);color:var(--mc-text)}
+.mc .mc-badge.mc-l-html{color:var(--mc-html);background:var(--mc-html-bg);border-color:var(--mc-html)}
+.mc .mc-badge.mc-l-css{color:var(--mc-css);background:var(--mc-css-bg);border-color:var(--mc-css)}
+.mc .mc-badge.mc-l-js{color:var(--mc-js);background:var(--mc-js-bg);border-color:var(--mc-js)}
+.mc .mc-badge.mc-ok{background:var(--mc-success-bg);border-color:var(--mc-success);color:var(--mc-success)}
+.mc .mc-badge.mc-ko{background:var(--mc-danger-bg);border-color:var(--mc-danger);color:var(--mc-danger)}
+.mc .mc-q legend{display:grid;gap:.6rem;margin-bottom:.9rem}
+.mc .mc-q legend .mc-badges{display:flex;flex-wrap:wrap;gap:.4rem}
+.mc .mc-qtitle{font-size:1.35rem;line-height:1.4}
+.mc .mc-qtitle:focus{outline:none}
+.mc .mc-qtitle:focus-visible{outline:.22rem solid var(--mc-focus)}
+.mc .mc-opts{display:grid;gap:.55rem}
+.mc .mc-opt{display:flex;gap:.8rem;align-items:center;padding:.75rem .9rem;border-radius:.75rem;border:2px solid var(--mc-border);background:var(--mc-surface);cursor:pointer;font-size:1.05rem}
+.mc .mc-opt:hover{border-color:var(--mc-accent)}
+.mc .mc-opt:has(input:checked){border-color:var(--mc-accent);background:var(--mc-surface-2)}
+.mc .mc-opt input{flex:none;width:1.35rem;height:1.35rem;margin:0;accent-color:var(--mc-accent)}
+.mc .mc-opt-l{flex:none;display:grid;place-items:center;width:2rem;height:2rem;border-radius:.5rem;background:var(--mc-surface-2);border:2px solid var(--mc-border);font-family:var(--mc-mono);font-weight:600}
+.mc .mc-opt-t{flex:1;min-width:0}
+.mc .mc-opt-tag{flex:none;font-size:.85rem;font-weight:700;padding:.1rem .55rem;border-radius:99rem;border:2px solid currentColor}
+.mc .mc-opt.mc-locked{cursor:default}
+.mc .mc-opt.mc-right{border-color:var(--mc-success);background:var(--mc-success-bg)}
+.mc .mc-opt.mc-right .mc-opt-tag,.mc .mc-opt.mc-right .mc-opt-l{color:var(--mc-success);border-color:var(--mc-success)}
+.mc .mc-opt.mc-wrong{border-color:var(--mc-danger);background:var(--mc-danger-bg)}
+.mc .mc-opt.mc-wrong .mc-opt-tag,.mc .mc-opt.mc-wrong .mc-opt-l{color:var(--mc-danger);border-color:var(--mc-danger)}
+.mc .mc-fb{margin-top:.9rem;padding:0;font-size:1.05rem}
+.mc .mc-fb:not(:empty){padding:.85rem 1rem;border-radius:.75rem;border:var(--mc-bw) solid var(--mc-border);background:var(--mc-surface-2)}
+.mc .mc-fb.mc-good{border-color:var(--mc-success)}
+.mc .mc-fb.mc-bad{border-color:var(--mc-danger)}
+.mc .mc-fb b{display:block;font-size:1.1rem;margin-bottom:.2rem}
+.mc .mc-fb.mc-good b{color:var(--mc-success)}
+.mc .mc-fb.mc-bad b{color:var(--mc-danger)}
+.mc .mc-qact{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem}
+
+/* bilan */
+.mc .mc-score{display:grid;gap:1rem;grid-template-columns:minmax(0,1fr);padding:1.5rem;border-width:3px}
+.mc .mc-score.mc-pass{border-color:var(--mc-success)}
+.mc .mc-score.mc-fail{border-color:var(--mc-danger)}
+.mc .mc-score-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem}
+.mc .mc-big{font-size:clamp(2.8rem,8vw,4rem);font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.mc .mc-big small{font-size:.45em;color:var(--mc-muted)}
+.mc .mc-pct{font-size:1.25rem;font-weight:700;margin-top:.3rem}
+.mc .mc-verdict{display:inline-flex;align-items:center;gap:.6rem;padding:.6rem 1.1rem;border-radius:.8rem;font-weight:700;font-size:1.2rem;border:2px solid currentColor}
+.mc .mc-pass .mc-verdict{color:var(--mc-success);background:var(--mc-success-bg)}
+.mc .mc-fail .mc-verdict{color:var(--mc-danger);background:var(--mc-danger-bg)}
+.mc .mc-verdict svg{width:1.5em;height:1.5em}
+.mc .mc-gauge{position:relative;padding-top:1.7rem}
+.mc .mc-gauge .mc-meter{height:1.3rem}
+.mc .mc-pass .mc-gauge .mc-meter>span{background:var(--mc-success)}
+.mc .mc-fail .mc-gauge .mc-meter>span{background:var(--mc-danger)}
+.mc .mc-mark{position:absolute;left:70%;top:1.2rem;bottom:-.4rem;width:3px;margin-left:-1.5px;background:var(--mc-text);border-radius:2px}
+.mc .mc-mark-lbl{position:absolute;left:70%;top:0;transform:translateX(-50%);font-size:.88rem;font-weight:700;white-space:nowrap}
+.mc .mc-lms{display:grid;gap:.8rem;grid-template-columns:repeat(auto-fit,minmax(min(13rem,100%),1fr))}
+.mc .mc-lm{display:grid;gap:.3rem}
+.mc .mc-lm-top{display:flex;justify-content:space-between;font-weight:700}
+.mc .mc-lm .mc-meter{height:.75rem}
+.mc .mc-lm.mc-l-html .mc-meter>span{background:var(--mc-html)}
+.mc .mc-lm.mc-l-css .mc-meter>span{background:var(--mc-css)}
+.mc .mc-lm.mc-l-js .mc-meter>span{background:var(--mc-js)}
+.mc .mc-comment{padding:1rem 1.2rem;border-radius:.8rem;background:var(--mc-surface-2);border:var(--mc-bw) solid var(--mc-border);border-left-width:.4rem;font-size:1.08rem}
+.mc .mc-pass .mc-comment,.mc .mc-comment.mc-pass{border-left-color:var(--mc-success)}
+.mc .mc-comment.mc-fail{border-left-color:var(--mc-danger)}
+.mc .mc-comment h3{font-size:1.15rem;margin-bottom:.35rem}
+.mc .mc-lessons{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;padding:0}
+.mc .mc-lessons li{padding:.4rem .8rem;border-radius:.6rem;border:2px solid var(--mc-warn);background:var(--mc-warn-bg);font-weight:700}
+.mc .mc-lessons li code{background:transparent;padding:0;font-weight:600;color:var(--mc-warn)}
+.mc .mc-actions{display:flex;flex-wrap:wrap;gap:.7rem;align-items:center}
+.mc .mc-teams{margin:0;padding-left:0;list-style:none;counter-reset:mct;display:grid;gap:.55rem}
+.mc .mc-teams li{counter-increment:mct;display:grid;grid-template-columns:2.3rem minmax(0,1fr);gap:.8rem;align-items:start}
+.mc .mc-teams li::before{content:counter(mct);display:grid;place-items:center;width:2.3rem;height:2.3rem;border-radius:.6rem;background:var(--mc-accent);color:var(--mc-on-accent);font-family:var(--mc-mono);font-weight:600}
+.mc details.mc-card > summary{cursor:pointer;padding:1.1rem 1.5rem;font-weight:700;font-size:1.2rem;list-style-position:inside}
+.mc details.mc-card[open] > summary{border-bottom:var(--mc-bw) solid var(--mc-border)}
+.mc .mc-rv{list-style:none;margin:0;padding:1rem 1.5rem 1.5rem;display:grid;gap:.8rem}
+.mc .mc-rv li{padding:.9rem 1rem;border-radius:.8rem;border:var(--mc-bw) solid var(--mc-border);border-left-width:.4rem;background:var(--mc-surface-2);display:grid;gap:.3rem}
+.mc .mc-rv li.mc-ok{border-left-color:var(--mc-success)}
+.mc .mc-rv li.mc-ko{border-left-color:var(--mc-danger)}
+.mc .mc-rv .mc-rv-q{font-weight:700;font-size:1.05rem}
+.mc .mc-rv .mc-rv-meta{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center}
+.mc .mc-rv .mc-rv-why{color:var(--mc-muted)}
+.mc .mc-print-only{display:none}
+
+/* dialogue, notification, pied de page */
+.mc dialog.mc-dlg{border:2px solid var(--mc-border);border-radius:1rem;background:var(--mc-surface);color:var(--mc-text);padding:1.5rem;max-width:min(32rem,calc(100vw - 2rem));box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.mc dialog.mc-dlg::backdrop{background:rgba(2,6,23,.6)}
+.mc .mc-dlg h2{font-size:1.3rem;margin-bottom:.6rem}
+.mc .mc-dlg p{margin:0 0 1.2rem;color:var(--mc-muted)}
+.mc .mc-dlg-actions{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:flex-end}
+.mc .mc-toast{position:fixed;left:50%;bottom:calc(1.2rem + env(safe-area-inset-bottom,0px));transform:translate(-50%,150%);background:var(--mc-text);color:var(--mc-bg);padding:.75rem 1.2rem;border-radius:.7rem;font-weight:700;z-index:2000;transition:transform .3s ease;width:max-content;max-width:calc(100vw - 2rem);text-align:center}
+.mc .mc-toast.mc-on{transform:translate(-50%,0)}
+.mc .mc-foot{max-width:62rem;margin:0 auto;padding:1.5rem 1rem 3rem;color:var(--mc-muted);border-top:1px solid var(--mc-border)}
+
+/* pluie Matrix, derrière les textes */
+:root{--mcm-op:.6;--mcm-glyph:#16a34a;--mcm-head:#14532d}
+:root[data-mc-scheme="dark"]{--mcm-op:.8;--mcm-glyph:#22c55e;--mcm-head:#f0fdf4}
+:root[data-mc-contrast="high"]{--mcm-op:.45}
+:root[data-mc-contrast="max"][data-mc-scheme="light"]{--mcm-op:.3;--mcm-glyph:#14532d;--mcm-head:#052e16}
+:root[data-mc-contrast="max"][data-mc-scheme="dark"]{--mcm-op:.4;--mcm-glyph:#00ff66;--mcm-head:#ffffff}
+.mc .mcm-rain{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;pointer-events:none;display:block;opacity:var(--mcm-op);transition:opacity .5s ease}
+.mc .mcm-rain.mcm-off{opacity:0}
+.mc > .mc-main,.mc > .mc-foot{position:relative;z-index:1}
+.mc .mc-hero-txt,.mc .mc-steps,.mc > .mc-foot{background:color-mix(in srgb,var(--mc-bg) 84%,transparent);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.mc .mc-hero-txt{border-radius:1rem;padding:1rem;margin-inline:-1rem}
+.mc .mc-steps{border-radius:99rem;padding:.4rem;width:fit-content;max-width:100%}
+:root[data-mc-contrast="max"] .mc .mc-hero-txt,:root[data-mc-contrast="max"] .mc .mc-steps,:root[data-mc-contrast="max"] .mc > .mc-foot{background:var(--mc-bg);backdrop-filter:none}
+.mc .mc-btn.mcm-btn{border-color:var(--mcm-glyph)}
+.mc .mcm-btn svg{width:1.15em;height:1.15em;flex:none;color:var(--mcm-glyph)}
+.mc .mcm-btn[aria-pressed="false"] svg{color:var(--mc-text)}
+
+/* contrastes forts */
+:root[data-mc-contrast="high"] .mc .mc-bar,:root[data-mc-contrast="max"] .mc .mc-bar{background:var(--mc-surface);backdrop-filter:none}
+:root[data-mc-contrast="high"] .mc .mc-meter,:root[data-mc-contrast="max"] .mc .mc-meter{border-width:2px;border-color:var(--mc-text)}
+:root[data-mc-contrast="max"] .mc .mc-meter>span{background:var(--mc-accent)!important}
+:root[data-mc-contrast="max"] .mc .mc-btn,:root[data-mc-contrast="max"] .mc .mc-badge,:root[data-mc-contrast="max"] .mc .mc-group,:root[data-mc-contrast="max"] .mc .mc-clock{border-width:2px;border-color:var(--mc-text)}
+:root[data-mc-contrast="max"] .mc .mc-opt.mc-right,:root[data-mc-contrast="max"] .mc .mc-opt.mc-wrong{border-width:4px}
+:root[data-mc-contrast="max"] .mc :focus-visible{outline-width:.3rem}
+
+/* barre de défilement */
+@supports not selector(::-webkit-scrollbar){html{scrollbar-color:var(--mc-accent) var(--mc-surface-2)}}
+::-webkit-scrollbar{width:18px;height:18px}
+::-webkit-scrollbar-track{background:var(--mc-surface-2);border-left:1px solid var(--mc-border)}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--mc-accent),var(--mc-success));border:4px solid var(--mc-surface-2);background-clip:padding-box;border-radius:99px;min-height:64px}
+
+@media (max-width:40rem){
+  .mc .mc-bar{position:static}
+  .mc .mc-btn{padding:.35rem .55rem}
+  .mc .mc-tools{width:100%}
+  .mc .mc-group{flex:1 1 100%}
+  .mc .mc-group .mc-btn{flex:1;min-width:0}
+  .mc .mc-brand .mc-full{display:none}
+  .mc .mc-tools .mc-btn .mc-txt{display:none}
+  .mc .mc-clock{padding:.25rem .6rem;font-size:1rem;margin-left:auto}
+  .mc .mc-clock svg{display:none}
+  .mc .mc-block,.mc .mc-score{padding:1.1rem}
+  .mc .mc-opt{padding:.65rem .7rem;gap:.6rem}
+  .mc .mc-steps{border-radius:1rem}
+}
+@media (prefers-reduced-motion:reduce){
+  .mc *,.mc *::before,.mc *::after{transition:none!important;animation:none!important}
+}
+
+/* impression : seul le bilan sort, en noir sur blanc */
+@media print{
+  @page{size:A4;margin:14mm}
+  :root{font-size:12pt!important;
+    --mc-bg:#fff!important;--mc-surface:#fff!important;--mc-surface-2:#f1f5f9!important;--mc-border:#475569!important;
+    --mc-text:#000!important;--mc-muted:#1f2937!important;--mc-accent:#1e3a8a!important;--mc-on-accent:#fff!important;
+    --mc-success:#064e3b!important;--mc-success-bg:#d1fae5!important;--mc-danger:#991b1b!important;--mc-danger-bg:#fee2e2!important;
+    --mc-warn:#7c2d12!important;--mc-warn-bg:#ffedd5!important;--mc-track:#cbd5e1!important;--mc-shadow:none!important;
+    --mc-html:#9a3412!important;--mc-html-bg:#ffedd5!important;--mc-css:#1e40af!important;--mc-css-bg:#dbeafe!important;--mc-js:#713f12!important;--mc-js-bg:#fef9c3!important}
+  html body,.mc{background:#fff!important;color:#000!important}
+  .mc *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .mc .mc-bar,.mc .mcm-rain,.mc .mc-hero,.mc .mc-steps,.mc #mc-step-id,.mc #mc-step-quiz,.mc .mc-noprint,.mc .mc-foot,.mc .mc-toast,.mc dialog,.mc .mc-skip,.mc .mc-nojs{display:none!important}
+  .mc .mc-print-only{display:block!important}
+  .mc .mc-main{max-width:none;padding:0}
+  .mc .mc-card{box-shadow:none;break-inside:avoid}
+  .mc details.mc-card{break-inside:auto}
+  .mc .mc-rv li{break-inside:avoid}
+  .mc .mc-printhead{border-bottom:3px solid #1e3a8a;padding-bottom:.6rem;margin-bottom:1rem}
+  .mc .mc-printhead h1{font-size:1.6rem;color:#1e3a8a}
+}
+</style>
+</head>
+<body>
+<!-- ===== AJOUT : intro « waouh » à l'ouverture (placée juste après <body>) ===== -->
+<script>
+/* Applique tout de suite le thème, le contraste et la taille mémorisés (pas de flash)
+   et active l'intro, sauf si l'utilisateur a demandé moins d'animations. */
+(function(){
+  var r=document.documentElement;
+  try{
+    var t=localStorage.getItem('ondea-mc-theme');
+    if(t==='light'||t==='dark'){r.setAttribute('data-mc-theme',t);}
+    var dark=(t==='light'||t==='dark')?t==='dark':!!(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches);
+    r.setAttribute('data-mc-scheme',dark?'dark':'light');
+    var c=localStorage.getItem('ondea-mc-contrast');
+    if(c==='high'||c==='max'){r.setAttribute('data-mc-contrast',c);}
+    var s=parseFloat(localStorage.getItem('ondea-mc-scale'));
+    if([.85,1,1.15,1.3,1.5,1.75,2].indexOf(s)>-1){r.style.setProperty('--mc-scale',s);}
+  }catch(e){}
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){r.classList.add('wow');}
+})();
+</script>
+<style>
+  /* Couleurs des effets, dans la charte du mini-cours (HTML orange · CSS bleu · JS jaune) */
+  :root{
+    --wow-glow:rgba(30,58,138,.28);--wow-ring:rgba(30,58,138,.14);
+    --wow-a-html:rgba(234,88,12,.13);--wow-a-css:rgba(37,99,235,.13);--wow-a-js:rgba(202,138,4,.15);
+    --wow-spot:rgba(37,99,235,.08);--wow-card-spot:rgba(37,99,235,.09);
+    --wow-card-sh:0 16px 36px rgba(15,23,42,.14),0 0 0 1px rgba(30,58,138,.25);
+    --wow-intro-glow:rgba(37,99,235,.16);
+  }
+  :root[data-mc-scheme="dark"]{
+    --wow-glow:rgba(147,197,253,.32);--wow-ring:rgba(147,197,253,.14);
+    --wow-a-html:rgba(253,186,116,.11);--wow-a-css:rgba(147,197,253,.12);--wow-a-js:rgba(253,224,71,.09);
+    --wow-spot:rgba(147,197,253,.07);--wow-card-spot:rgba(147,197,253,.09);
+    --wow-card-sh:0 18px 40px rgba(0,0,0,.45),0 0 0 1px rgba(147,197,253,.25);
+    --wow-intro-glow:rgba(147,197,253,.16);
+  }
+
+  /* Rideau d'ouverture : n'existe que si l'intro est active */
+  .wow-intro{display:none}
+  html.wow .wow-intro{display:block;position:fixed;inset:0;z-index:99999;cursor:pointer;
+    animation:wow-intro-off 0s linear 8.9s forwards}
+  html.wow.wow-skip .wow-intro{display:none}
+  .wow-half{position:absolute;left:0;right:0;height:50.5%;background:var(--mc-bg)}
+  .wow-half--top{top:0;background:radial-gradient(120% 90% at 50% 100%,var(--wow-intro-glow),transparent 60%),var(--mc-bg);
+    animation:wow-open-up .85s cubic-bezier(.77,0,.18,1) 8s forwards}
+  .wow-half--bot{bottom:0;background:radial-gradient(120% 90% at 50% 0%,var(--wow-intro-glow),transparent 60%),var(--mc-bg);
+    animation:wow-open-down .85s cubic-bezier(.77,0,.18,1) 8s forwards}
+  .wow-seam{position:absolute;left:0;right:0;top:50%;height:3px;margin-top:-1.5px;transform:scaleX(0);
+    background:linear-gradient(90deg,transparent,var(--mc-html) 20%,var(--mc-css) 50%,var(--mc-js) 80%,transparent);
+    box-shadow:0 0 18px 2px var(--wow-glow);animation:wow-seam 1s cubic-bezier(.2,.8,.2,1) 7.65s forwards}
+  .wow-stage{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:14px;padding:24px;text-align:center;animation:wow-stage-out .45s ease 7.75s forwards}
+  .wow-emblem{position:relative;width:150px;height:150px;display:grid;place-items:center}
+  .wow-emblem::before{content:"";position:absolute;inset:-30%;border-radius:50%;
+    background:radial-gradient(closest-side,var(--wow-glow),transparent 72%);animation:wow-halo 1.6s ease-in-out .3s both}
+  .wow-ring{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);overflow:visible}
+  .wow-ring circle{fill:none;stroke-linecap:round;stroke-width:3}
+  .wow-ring .c1{stroke:var(--mc-html);stroke-dasharray:654;stroke-dashoffset:654;animation:wow-dash 1.1s cubic-bezier(.6,0,.2,1) .1s forwards}
+  .wow-ring .c2{stroke:var(--mc-css);stroke-dasharray:578;stroke-dashoffset:-578;animation:wow-dash 1.15s cubic-bezier(.6,0,.2,1) .2s forwards}
+  .wow-ring .c3{stroke:var(--mc-js);stroke-dasharray:503;stroke-dashoffset:503;animation:wow-dash 1.2s cubic-bezier(.6,0,.2,1) .3s forwards}
+  .wow-code{position:relative;width:62px;height:auto;opacity:0;animation:wow-doc .7s cubic-bezier(.2,1.4,.3,1) .55s forwards}
+  .wow-kick{margin:0;font-family:var(--mc-mono);font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--mc-accent);opacity:0;animation:wow-fade .6s ease .5s forwards}
+  .wow-title{margin:0;font-family:var(--mc-font);font-weight:700;font-size:clamp(34px,7vw,64px);
+    line-height:1.1;color:var(--mc-text);display:flex;flex-wrap:wrap;justify-content:center;perspective:600px}
+  .wow-title span{display:inline-block;opacity:0;transform:translateY(60%) rotateX(-70deg);transform-origin:50% 100%;
+    animation:wow-letter .7s cubic-bezier(.2,.8,.2,1) calc(.6s + var(--i) * .04s) forwards}
+  .wow-title .h{color:var(--mc-html)}.wow-title .c{color:var(--mc-css)}.wow-title .j{color:var(--mc-js)}
+  .wow-title .d{color:var(--mc-muted);margin:0 .25em}
+  .wow-line{display:block;width:min(340px,70vw);height:2px;transform:scaleX(0);
+    background:linear-gradient(90deg,transparent,var(--mc-html),var(--mc-css),var(--mc-js),transparent);animation:wow-line .7s cubic-bezier(.2,.8,.2,1) 1.1s forwards}
+  .wow-sub{margin:0;font-family:var(--mc-font);font-size:17px;color:var(--mc-muted);opacity:0;animation:wow-fade .5s ease 1.2s forwards}
+  .wow-skiphint{position:absolute;left:0;right:0;bottom:22px;margin:0;text-align:center;font-family:var(--mc-mono);
+    font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--mc-muted);opacity:0;animation:wow-fade .5s ease .9s forwards,wow-stage-out .3s ease 7.75s forwards}
+
+  @keyframes wow-intro-off{to{visibility:hidden;pointer-events:none}}
+  @keyframes wow-open-up{to{transform:translateY(-101%)}}
+  @keyframes wow-open-down{to{transform:translateY(101%)}}
+  @keyframes wow-seam{0%{transform:scaleX(0);opacity:1}40%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
+  @keyframes wow-stage-out{to{opacity:0;transform:scale(1.08);filter:blur(6px)}}
+  @keyframes wow-halo{0%{opacity:0;transform:scale(.4)}60%{opacity:1;transform:scale(1.1)}100%{opacity:.75;transform:scale(1)}}
+  @keyframes wow-dash{to{stroke-dashoffset:0}}
+  @keyframes wow-doc{from{opacity:0;transform:scale(.3) rotate(-25deg)}to{opacity:1;transform:none}}
+  @keyframes wow-fade{to{opacity:1}}
+  @keyframes wow-letter{to{opacity:1;transform:none}}
+  @keyframes wow-line{to{transform:scaleX(1)}}
+</style>
+<div class="wow-intro" id="wow-intro" aria-hidden="true">
+  <div class="wow-half wow-half--top"></div>
+  <div class="wow-half wow-half--bot"></div>
+  <div class="wow-stage">
+    <div class="wow-emblem">
+      <svg class="wow-ring" viewBox="0 0 220 220"><circle class="c1" cx="110" cy="110" r="104"/><circle class="c2" cx="110" cy="110" r="92"/><circle class="c3" cx="110" cy="110" r="80"/></svg>
+      <svg class="wow-code" viewBox="0 0 64 44" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M32 3 15 9v11c0 10 7 17.5 17 21 10-3.5 17-11 17-21V9z" stroke="var(--mc-html)" stroke-width="4.5"/>
+        <path d="M24.5 22l5.5 5.5 10-10.5" stroke="var(--mc-css)" stroke-width="5"/>
+        <path d="M4 22h5M55 22h5" stroke="var(--mc-js)" stroke-width="5"/>
+      </svg>
+    </div>
+    <p class="wow-kick">Ondea Web Studio · Quiz de positionnement</p>
+    <p class="wow-title"><span class="h" style="--i:0">C</span><span class="h" style="--i:1">Y</span><span class="c" style="--i:2">B</span><span class="c" style="--i:3">E</span><span class="c" style="--i:4">R</span><span class="d" style="--i:5">·</span><span class="j" style="--i:6">M</span><span class="j" style="--i:7">N</span></p>
+    <span class="wow-line"></span>
+    <p class="wow-sub">15 questions pour faire le point</p>
+  </div>
+  <span class="wow-seam"></span>
+  <p class="wow-skiphint">Cliquez pour passer</p>
+</div>
+<!-- ===== FIN AJOUT intro ===== -->
+
+<div class="mc" id="mc-app">
+<canvas id="mc-rain" class="mcm-rain mcm-off" aria-hidden="true"></canvas>
+<a class="mc-skip" href="#mc-content">Aller au quiz</a>
+
+<header class="mc-bar">
+  <div class="mc-bar-in">
+    <div class="mc-brand"><span class="mc-brand-mark" aria-hidden="true">MN.</span><span><span class="mc-full">Quiz de positionnement </span>Cybersécurité</span></div>
+
+    <div class="mc-clock" role="timer" aria-label="Heure actuelle">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      <span class="mc-clock-date" id="mc-clockDate"></span>
+      <time id="mc-clockTime"><span id="mc-clockHM">--<span class="mc-clock-sep">:</span>--</span><span class="mc-clock-sep">:</span><span class="mc-clock-s" id="mc-clockS">--</span></time>
+    </div>
+
+    <div class="mc-tools">
+      <div class="mc-group" role="group" aria-label="Taille du texte">
+        <button class="mc-btn" id="mc-zoomOut" type="button" aria-label="Diminuer la taille du texte"><span aria-hidden="true" style="font-size:.85em">A−</span></button>
+        <button class="mc-btn mc-zoom-val" id="mc-zoomReset" type="button" aria-label="Taille du texte : 100 %. Revenir à la taille normale"><span id="mc-zoomVal">100 %</span></button>
+        <button class="mc-btn" id="mc-zoomIn" type="button" aria-label="Agrandir la taille du texte"><span aria-hidden="true" style="font-size:1.2em">A+</span></button>
+      </div>
+      <button class="mc-btn mc-btn-line" id="mc-themeBtn" type="button" aria-pressed="false">
+        <svg class="mc-i" id="mc-themeIco" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <span class="mc-txt" id="mc-themeTxt">Changer de thème</span>
+      </button>
+      <button class="mc-btn mc-btn-line" id="mc-contrastBtn" type="button">
+        <svg class="mc-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg>
+        <span class="mc-txt">Contraste :</span> <span id="mc-contrastTxt">Standard</span>
+      </button>
+      <button class="mc-btn mc-btn-line mcm-btn" id="mc-rainBtn" type="button" aria-pressed="true"></button>
+      <button class="mc-btn mc-btn-warn" id="mc-resetAll" type="button">
+        <svg class="mc-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 3v6h6"/></svg>
+        <span class="mc-txt">Recommencer</span><span class="mc-sr"> le quiz depuis le début</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="mc-main" id="mc-content" tabindex="-1">
+  <p class="mc-nojs" id="mc-nojs" role="note"><b>JavaScript ne s'exécute pas ici.</b> Le quiz et le bilan PDF ont besoin de JavaScript. Ouvrez le fichier dans un vrai navigateur : double-clic sur le fichier enregistré, ou clic droit puis « Ouvrir avec » Chrome, Edge ou Firefox.</p>
+
+  <section class="mc-hero" aria-labelledby="mc-pageTitle">
+    <div class="mc-hero-txt">
+      <div class="mc-kicker">Médiateur Numérique · Positionnement avant les ateliers de prévention</div>
+      <h1 id="mc-pageTitle">Qu'avez-vous retenu de la cybersécurité au quotidien&nbsp;?</h1>
+      <p class="mc-lead">Quinze questions pour faire le point avant d'animer vos ateliers de prévention&nbsp;: <br>
+        <span class="mc-word mc-l-html">Arnaques</span> pour repérer les pièges, <span class="mc-word mc-l-css">Mots de passe</span> pour protéger les comptes, <span class="mc-word mc-l-js">Accompagnement</span> pour la posture du médiateur. <br>
+        Aucun piège : on mesure ce qui est acquis pour savoir quoi revoir ensemble.</p>
+    </div>
+    <ul class="mc-facts" aria-label="Le quiz en bref">
+      <li class="mc-card mc-fact"><b>15</b><span>questions, <br> 5 par thème</span></li>
+      <li class="mc-card mc-fact"><b>70 %</b><span>pour réussir, <br> soit 11 bonnes réponses</span></li>
+      <li class="mc-card mc-fact"><b>1 choix</b><span>par question, <br> corrigé aussitôt</span></li>
+      <li class="mc-card mc-fact"><b>PDF</b><span>à envoyer à votre formateur sur Teams</span></li>
+    </ul>
+  </section>
+
+  <ol class="mc-steps" aria-label="Étapes du quiz">
+    <li data-step="id"><span aria-hidden="true">1</span>Identification</li>
+    <li data-step="quiz"><span aria-hidden="true">2</span>Questions</li>
+    <li data-step="result"><span aria-hidden="true">3</span>Bilan PDF</li>
+  </ol>
+
+  <!-- ÉTAPE 1 · Identification -->
+  <section class="mc-card mc-block" id="mc-step-id" aria-labelledby="mc-idTitle">
+    <h2 id="mc-idTitle" tabindex="-1">1. Qui passe le quiz&nbsp;?</h2>
+    <p class="mc-sub">Votre prénom et votre nom figureront sur le bilan PDF. <br> Le quiz ne démarre qu'une fois les deux champs remplis.</p>
+    <form id="mc-idForm" novalidate>
+      <div class="mc-fields">
+        <div class="mc-field">
+          <label for="mc-first">Prénom<abbr title="obligatoire" aria-hidden="true">*</abbr></label>
+          <input type="text" id="mc-first" name="given-name" autocomplete="given-name" required maxlength="40" spellcheck="false" aria-describedby="mc-firstErr">
+          <p class="mc-err" id="mc-firstErr" aria-live="polite"></p>
+        </div>
+        <div class="mc-field">
+          <label for="mc-last">Nom<abbr title="obligatoire" aria-hidden="true">*</abbr></label>
+          <input type="text" id="mc-last" name="family-name" autocomplete="family-name" required maxlength="40" spellcheck="false" aria-describedby="mc-lastErr">
+          <p class="mc-err" id="mc-lastErr" aria-live="polite"></p>
+        </div>
+      </div>
+      <h3 class="mc-sr">Règles du quiz</h3>
+      <ul class="mc-rules" style="margin:1rem 0 1.2rem">
+        <li><svg class="mc-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><span>Une seule bonne réponse par question. Choisissez, puis validez.</span></li>
+        <li><svg class="mc-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4"/></svg><span>Une fois validée, la réponse est définitive : la réponse attendue s'affiche avec son explication.</span></li>
+        <li><svg class="mc-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15h6M9 11h2"/></svg><span>À la fin, téléchargez votre bilan PDF et envoyez-le <b>en message privé</b> à votre formateur sur Microsoft Teams.</span></li>
+      </ul>
+      <div class="mc-start">
+        <button type="submit" class="mc-btn mc-btn-solid mc-btn-lg" id="mc-startBtn" aria-disabled="true" aria-describedby="mc-startHint">
+          Commencer le quiz
+          <svg class="mc-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+        <p class="mc-note" id="mc-startHint">Saisissez d'abord votre prénom et votre nom.</p>
+      </div>
+    </form>
+  </section>
+
+  <!-- ÉTAPE 2 · Questions -->
+  <section class="mc-card mc-block" id="mc-step-quiz" aria-label="Questions du quiz" hidden>
+    <div class="mc-qhead">
+      <p class="mc-qcount">Question <b id="mc-qNum">1 / 15</b></p>
+      <p class="mc-live" id="mc-who"></p>
+    </div>
+    <div class="mc-meter" role="progressbar" id="mc-qBar" aria-label="Avancement du quiz" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div>
+    <fieldset class="mc-q" id="mc-q">
+      <legend>
+        <span class="mc-badges"><span class="mc-badge" id="mc-qLang">Arnaques</span><span class="mc-badge" id="mc-qRef"></span></span>
+        <h2 class="mc-qtitle" id="mc-qTitle" tabindex="-1"></h2>
+      </legend>
+      <div class="mc-opts" id="mc-qOpts"></div>
+    </fieldset>
+    <div class="mc-fb" id="mc-qFb" aria-live="polite"></div>
+    <div class="mc-qact">
+      <button class="mc-btn mc-btn-solid mc-btn-lg" type="button" id="mc-validate">Valider ma réponse</button>
+      <button class="mc-btn mc-btn-solid mc-btn-lg" type="button" id="mc-next" hidden>Question suivante</button>
+    </div>
+    <p class="mc-live">Bonnes réponses jusqu'ici : <b id="mc-liveScore">0</b></p>
+  </section>
+
+  <!-- ÉTAPE 3 · Bilan -->
+  <section id="mc-step-result" class="mc-stack" aria-labelledby="mc-resTitle" hidden>
+    <div class="mc-print-only mc-printhead">
+      <h1>Bilan du quiz de positionnement Cybersécurité · Médiateur numérique</h1>
+      <p id="mc-printMeta"></p>
+    </div>
+
+    <div class="mc-card mc-score" id="mc-scoreCard">
+      <h2 class="mc-h2" id="mc-resTitle" tabindex="-1">3. Votre bilan</h2>
+      <div class="mc-score-top">
+        <div>
+          <div class="mc-big" id="mc-resScore">0 <small>/ 15</small></div>
+          <p class="mc-pct" id="mc-resPct">0 % de bonnes réponses</p>
+        </div>
+        <p class="mc-verdict" id="mc-resVerdict"></p>
+      </div>
+      <div class="mc-gauge">
+        <span class="mc-mark-lbl" aria-hidden="true">Seuil 70 %</span>
+        <div class="mc-meter" role="progressbar" id="mc-resBar" aria-label="Score global" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div>
+        <span class="mc-mark" aria-hidden="true"></span>
+      </div>
+      <div class="mc-lms">
+        <div class="mc-lm mc-l-html"><div class="mc-lm-top"><span>Arnaques</span><span id="mc-lmv-html">0 / 5</span></div><div class="mc-meter" role="progressbar" id="mc-lmb-html" aria-label="Résultat Arnaques" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div></div>
+        <div class="mc-lm mc-l-css"><div class="mc-lm-top"><span>Mots de passe</span><span id="mc-lmv-css">0 / 5</span></div><div class="mc-meter" role="progressbar" id="mc-lmb-css" aria-label="Résultat Mots de passe" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div></div>
+        <div class="mc-lm mc-l-js"><div class="mc-lm-top"><span>Accompagnement</span><span id="mc-lmv-js">0 / 5</span></div><div class="mc-meter" role="progressbar" id="mc-lmb-js" aria-label="Résultat Accompagnement" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div></div>
+      </div>
+      <div class="mc-comment" id="mc-comment"><h3 id="mc-comTitle"></h3><p id="mc-comText"></p></div>
+      <div id="mc-lessonsWrap">
+        <h3 style="font-size:1.1rem;margin-bottom:.5rem">Notions du module à revoir en priorité</h3>
+        <ul class="mc-lessons" id="mc-lessons"></ul>
+      </div>
+      <p class="mc-note" id="mc-resMeta"></p>
+    </div>
+
+    <div class="mc-card mc-block mc-noprint" aria-labelledby="mc-sendTitle">
+      <h2 id="mc-sendTitle">Envoyez votre bilan à votre formateur</h2>
+      <div class="mc-actions">
+        <button class="mc-btn mc-btn-solid mc-btn-lg" type="button" id="mc-pdfBtn">
+          <svg class="mc-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
+          Télécharger mon bilan PDF
+        </button>
+        <button class="mc-btn mc-btn-line mc-btn-lg" type="button" id="mc-printBtn">
+          <svg class="mc-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V2h12v7"/><rect x="6" y="14" width="12" height="8" rx="1"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/></svg>
+          Imprimer ou PDF balisé
+        </button>
+        <a class="mc-btn mc-btn-line mc-btn-lg" id="mc-teamsLink" href="#" target="_blank" rel="noopener" hidden>Ouvrir la conversation Teams</a>
+      </div>
+      <p class="mc-note">« Imprimer ou PDF balisé » ouvre l'impression : choisissez <b>Enregistrer au format PDF</b>. <br> Ce PDF, structuré en titres et listes, est le plus confortable avec un lecteur d'écran.</p>
+      <h3 style="font-size:1.1rem">Envoi sur Microsoft Teams, en message privé</h3>
+      <ol class="mc-teams">
+        <li><span>Ouvrez Microsoft Teams, puis la rubrique <b>Conversation</b> (ou Chat).</span></li>
+        <li><span>Démarrez une nouvelle conversation et tapez le nom de votre formateur : <b id="mc-trainerName">Jean-Claude Lugo</b>. <br> Pas de canal d'équipe : le bilan est personnel.</span></li>
+        <li><span>Cliquez sur <b>Joindre un fichier</b> (le trombone ou le +), puis <b>Charger depuis cet appareil</b>. <br> Le PDF est dans votre dossier <b>Téléchargements</b> : <code id="mc-fileName">bilan.pdf</code></span></li>
+        <li><span>Ajoutez un petit mot si vous le souhaitez, puis envoyez.</span></li>
+      </ol>
+      <div class="mc-actions">
+        <button class="mc-btn mc-btn-line" type="button" id="mc-retry">Nouvelle tentative</button>
+      </div>
+    </div>
+
+    <details class="mc-card" id="mc-review">
+      <summary>Revoir mes 15 réponses</summary>
+      <ol class="mc-rv" id="mc-rv"></ol>
+    </details>
+  </section>
+</main>
+
+<footer class="mc-foot">Ondea Web · Quiz de positionnement cybersécurité du titre Médiateur Numérique (RNCP 40695), <br> à passer avant les ateliers de prévention. <br> Vos réponses restent sur votre PC : seul le PDF que vous génèrerez à la fin de ce quiz devra être transmis à votre formateur. ☺️</footer>
+
+<dialog class="mc-dlg" id="mc-dlg" aria-labelledby="mc-dlgTitle" aria-describedby="mc-dlgText">
+  <h2 id="mc-dlgTitle">Recommencer depuis le début&nbsp;?</h2>
+  <p id="mc-dlgText">Les réponses en cours seront effacées et les champs prénom et nom vidés. <br> Une nouvelle tentative sera notée sur le bilan.</p>
+  <div class="mc-dlg-actions">
+    <button class="mc-btn mc-btn-line" type="button" id="mc-dlgCancel">Annuler</button>
+    <button class="mc-btn mc-btn-solid" type="button" id="mc-dlgOk">Oui, recommencer</button>
+  </div>
+</dialog>
+
+<div class="mc-toast" id="mc-toast" role="status" aria-live="polite"></div>
+</div>
+
+<script>
+/* =====================================================================
+   Tout le JavaScript du quiz tient dans une seule fonction :
+   aucune variable ne sort, aucun conflit avec d'autres scripts.
+   ===================================================================== */
+(function () {
+"use strict";
+
+/* ---------- RÉGLAGES DU FORMATEUR ---------- */
+const TRAINER = {
+  name: "Jean-Claude Lugo",
+  role: "Formateur expert, Centre de Formation MODE 83",
+  teamsEmail: ""   /* facultatif : adresse Teams du formateur, ajoute un bouton « Ouvrir la conversation Teams » */
+};
+const PROGRAM = "Médiateur Numérique · Centre de Formation MODE 83 · Draguignan";
+const PASS = 70;   /* seuil de réussite en % */
+
+const root = document.documentElement;
+const app = document.getElementById("mc-app");
+if (!app) return;
+const noJs = document.getElementById("mc-nojs"); if (noJs) noJs.hidden = true;
+const byId = id => document.getElementById("mc-" + id);
+const pad = n => String(n).padStart(2, "0");
+const store = {
+  get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } },
+  set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} },
+  del(k){ try{ localStorage.removeItem(k); }catch(e){} }
+};
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const fmt = s => esc(s).replace(/`([^`]+)`/g, "<code>$1</code>");
+const plain = s => String(s).replace(/`([^`]+)`/g, "$1");
+function safe(label, fn){ try{ fn(); }catch(err){ if(window.console) console.warn("[quiz] " + label + " :", err); } }
+
+let toastT;
+function toast(msg){ const t = byId("toast"); if(!t) return; t.textContent = msg; t.classList.add("mc-on"); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove("mc-on"), 2800); }
+
+/* ---------- horloge ---------- */
+safe("horloge", () => {
+  const hm = byId("clockHM"), sEl = byId("clockS"), dateEl = byId("clockDate"), timeEl = byId("clockTime");
+  let f = null; try{ f = new Intl.DateTimeFormat("fr-FR", { weekday:"short", day:"numeric", month:"short" }); }catch(e){}
+  let last = "";
+  (function tick(){
+    const d = new Date(), h = pad(d.getHours()), m = pad(d.getMinutes());
+    if(h + m !== last){ last = h + m; hm.innerHTML = h + '<span class="mc-clock-sep">:</span>' + m; if(f) dateEl.textContent = f.format(d); }
+    sEl.textContent = pad(d.getSeconds());
+    timeEl.setAttribute("datetime", h + ":" + m);
+    setTimeout(tick, 1000 - d.getMilliseconds());
+  })();
+});
+
+/* ---------- taille du texte (mêmes réglages que le mini-cours) ---------- */
+safe("taille du texte", () => {
+  const SC = [0.85,1,1.15,1.3,1.5,1.75,2];
+  let si = SC.indexOf(parseFloat(store.get("ondea-mc-scale"))); if(si < 0) si = 1;
+  function apply(say){
+    const s = SC[si], pct = Math.round(s*100) + " %";
+    root.style.setProperty("--mc-scale", s);
+    byId("zoomVal").textContent = pct;
+    byId("zoomReset").setAttribute("aria-label", "Taille du texte : " + pct + ". Revenir à la taille normale");
+    byId("zoomOut").disabled = si === 0; byId("zoomIn").disabled = si === SC.length - 1;
+    store.set("ondea-mc-scale", s);
+    if(say) toast("Taille du texte : " + pct);
+  }
+  byId("zoomIn").addEventListener("click", () => { if(si < SC.length - 1){ si++; apply(true); } });
+  byId("zoomOut").addEventListener("click", () => { if(si > 0){ si--; apply(true); } });
+  byId("zoomReset").addEventListener("click", () => { si = 1; apply(true); });
+  apply(false);
+});
+
+/* ---------- thème ---------- */
+safe("thème", () => {
+  const SUN = '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>';
+  const MOON = '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>';
+  const mq = window.matchMedia ? matchMedia("(prefers-color-scheme: dark)") : null;
+  function isDark(){
+    const own = root.getAttribute("data-mc-theme"); if(own) return own === "dark";
+    const host = root.getAttribute("data-theme"); if(host === "dark" || host === "light") return host === "dark";
+    return !!(mq && mq.matches);
+  }
+  function paint(){
+    const d = isDark();
+    root.setAttribute("data-mc-scheme", d ? "dark" : "light");
+    byId("themeIco").innerHTML = d ? SUN : MOON;
+    byId("themeTxt").textContent = d ? "Mode clair" : "Mode sombre";
+    byId("themeBtn").setAttribute("aria-label", d ? "Passer en mode clair" : "Passer en mode sombre");
+    byId("themeBtn").setAttribute("aria-pressed", d ? "true" : "false");
+  }
+  const saved = store.get("ondea-mc-theme");
+  if(saved === "light" || saved === "dark") root.setAttribute("data-mc-theme", saved);
+  paint();
+  byId("themeBtn").addEventListener("click", () => {
+    const next = isDark() ? "light" : "dark";
+    root.setAttribute("data-mc-theme", next); store.set("ondea-mc-theme", next); paint();
+    toast(next === "dark" ? "Mode sombre activé" : "Mode clair activé");
+  });
+  if(mq){ mq.addEventListener ? mq.addEventListener("change", paint) : mq.addListener(paint); }
+});
+
+/* ---------- contraste ---------- */
+safe("contraste", () => {
+  const L = [["normal","Standard"],["high","Renforcé"],["max","Maximal"]];
+  let ci = L.findIndex(c => c[0] === store.get("ondea-mc-contrast")); if(ci < 0) ci = 0;
+  function apply(say){
+    const v = L[ci][0], lab = L[ci][1], next = L[(ci+1) % L.length][1];
+    if(v === "normal") root.removeAttribute("data-mc-contrast"); else root.setAttribute("data-mc-contrast", v);
+    byId("contrastTxt").textContent = lab;
+    byId("contrastBtn").setAttribute("aria-label", "Contraste : " + lab + ". Passer au contraste " + next.toLowerCase());
+    store.set("ondea-mc-contrast", v);
+    if(say) toast("Contraste : " + lab);
+  }
+  byId("contrastBtn").addEventListener("click", () => { ci = (ci+1) % L.length; apply(true); });
+  apply(false);
+});
+
+/* =====================================================================
+   CONTENU DU QUIZ · 15 questions, 5 par thème
+   a = index de la bonne réponse dans o (l'ordre affiché est mélangé)
+   ===================================================================== */
+const LNAME = { html:"Arnaques", css:"Mots de passe", js:"Accompagnement" };
+const LANGS = ["html","css","js"];
+const LESSONS = {
+  a1:"Les 3 signaux d'un SMS piège", a2:"Les bons réflexes et le 33700", a3:"Reconnaître un site officiel",
+  m1:"La recette d'un bon mot de passe", m2:"Un mot de passe par compte et la double authentification", m3:"Le gestionnaire de mots de passe",
+  p1:"FranceConnect et le poste partagé", p2:"La posture : accompagner sans faire à la place", p3:"Orienter vers les bons relais"
+};
+const Q = [
+ {id:"q1",lang:"html",lesson:"a1",q:"Un SMS annonce : « Votre colis est bloqué, payez 1,99 € de frais sous 24 h » avec un lien. Quels signaux d'alerte réunit-il ?",
+  o:["L'urgence, un lien à cliquer et une demande d'argent","Aucun : le montant est trop faible pour être une arnaque","Seulement une faute d'orthographe","Uniquement un numéro d'expéditeur inconnu"],a:0,
+  why:"Urgence, lien à cliquer, demande d'argent ou de données : ce sont les 3 signaux à faire repérer aux participants. Le petit montant sert surtout à récupérer les coordonnées bancaires."},
+ {id:"q2",lang:"html",lesson:"a2",q:"À quel numéro un usager peut-il transférer gratuitement un SMS frauduleux pour le signaler ?",
+  o:["Le 17","Le 33700","Le 3018","Le 115"],a:1,
+  why:"Le 33700 sert à signaler les SMS et appels frauduleux ou indésirables. Le 3018 est le numéro national contre le cyberharcèlement, le 115 celui du Samu social."},
+ {id:"q3",lang:"html",lesson:"a2",q:"Un participant a cliqué sur un lien piégé et saisi les numéros de sa carte bancaire. Quel est le premier bon réflexe ?",
+  o:["Attendre de voir si un prélèvement apparaît","Répondre au SMS pour demander un remboursement","Faire opposition auprès de sa banque sans attendre","Supprimer le SMS et ne rien dire"],a:2,
+  why:"L'opposition immédiate limite les dégâts. Ensuite, on oriente vers cybermalveillance.gouv.fr ou 17Cyber, et vers le dépôt de plainte."},
+ {id:"q4",lang:"html",lesson:"a3",q:"Quel repère aide le plus à reconnaître un site public officiel ?",
+  o:["Un cadenas dans la barre d'adresse","Une adresse en « .gouv.fr », tapée soi-même","Le logo Marianne affiché sur la page","Une première place dans les résultats de recherche"],a:1,
+  why:"Le cadenas indique seulement une connexion chiffrée : un faux site peut l'avoir. Un logo se copie, et un site payant peut être sponsorisé en tête des résultats. Quelques sites officiels ont leur propre adresse (ameli.fr, service-public.fr) : en cas de doute, on passe par service-public.fr."},
+ {id:"q5",lang:"html",lesson:"a3",q:"Un site propose de commander un acte de naissance pour 29,90 €. Qu'en dire à l'usager ?",
+  o:["C'est le tarif officiel de la mairie","C'est un intermédiaire payant : la demande est gratuite sur service-public.fr","C'est normal pour une livraison rapide","C'est obligatoire depuis la dématérialisation"],a:1,
+  why:"La demande d'acte de naissance est gratuite. Ces sites privés font payer une démarche gratuite : on vérifie toujours qu'on est sur le site officiel."},
+ {id:"q6",lang:"css",lesson:"m1",q:"Qu'est-ce qui rend un mot de passe le plus difficile à deviner ?",
+  o:["Remplacer un « a » par un « @ »","Y ajouter sa date de naissance","Sa longueur","Le changer chaque semaine"],a:2,
+  why:"La longueur compte plus que la complexité : chaque caractère ajouté multiplie les combinaisons. Une phrase de passe de plusieurs mots est longue et facile à retenir."},
+ {id:"q7",lang:"css",lesson:"m1",q:"Lequel de ces exemples fictifs est une bonne phrase de passe ?",
+  o:["Julie1987","Azerty123!","MotDePasse","Girafe-Tambour-Nuage-47"],a:3,
+  why:"Plusieurs mots sans lien + un chiffre : c'est long et mémorisable. Un prénom, une date ou une suite du clavier sont testés en premier par les pirates."},
+ {id:"q8",lang:"css",lesson:"m2",q:"Pourquoi utiliser un mot de passe différent pour chaque compte ?",
+  o:["Pour qu'une fuite sur un site n'ouvre pas tous les autres comptes","Parce que les sites refusent les mots de passe déjà utilisés ailleurs","Pour se connecter plus vite","Ce n'est utile que pour la banque"],a:0,
+  why:"Les pirates testent les identifiants volés sur d'autres sites. Un mot de passe unique limite la fuite à un seul compte."},
+ {id:"q9",lang:"css",lesson:"m2",q:"La double authentification, c'est…",
+  o:["Taper deux fois son mot de passe","Avoir deux adresses e-mail","Une seconde preuve en plus du mot de passe, comme un code reçu sur le téléphone","Changer de mot de passe deux fois par an"],a:2,
+  why:"Même si le mot de passe est volé, il manque la seconde preuve. On l'active d'abord sur la boîte mail, qui permet de réinitialiser tous les autres comptes."},
+ {id:"q10",lang:"css",lesson:"m3",q:"Qu'est-ce qu'un gestionnaire de mots de passe ?",
+  o:["Un carnet posé à côté de l'ordinateur","Un coffre-fort numérique : un seul mot de passe maître à retenir","Un service qui renvoie ses mots de passe par e-mail","Le navigateur d'un ordinateur partagé"],a:1,
+  why:"Le gestionnaire crée et range des mots de passe uniques et solides. Il ne reste qu'un mot de passe maître à retenir, qui doit être une vraie phrase de passe."},
+ {id:"q11",lang:"js",lesson:"p1",q:"À quoi sert FranceConnect ?",
+  o:["À payer ses démarches administratives en ligne","À se connecter à un service public avec un compte officiel déjà existant","À permettre au médiateur de se connecter à la place de l'usager","À éviter de se déconnecter en fin de démarche"],a:1,
+  why:"FranceConnect permet d'accéder à de nombreux services publics avec un compte déjà vérifié (impots.gouv.fr, ameli.fr…) : moins d'identifiants à retenir, et une porte d'entrée officielle."},
+ {id:"q12",lang:"js",lesson:"p1",q:"En fin de démarche sur un ordinateur partagé, quel geste protège les données de l'usager ?",
+  o:["Fermer simplement l'onglet","Éteindre l'écran","Laisser la session ouverte pour la personne suivante","Se déconnecter et refuser l'enregistrement du mot de passe"],a:3,
+  why:"Fermer l'onglet ne déconnecte pas toujours. On se déconnecte, on refuse d'enregistrer le mot de passe dans le navigateur, et on peut utiliser la navigation privée."},
+ {id:"q13",lang:"js",lesson:"p2",q:"Un usager vous tend son téléphone : « Tapez mes codes et faites-le pour moi. » Quelle est la bonne posture ?",
+  o:["Saisir ses codes pour gagner du temps","Le guider pour qu'il agisse lui-même, sans jamais saisir ni noter ses identifiants","Noter ses codes pour la prochaine fois","Refuser et mettre fin à l'accompagnement"],a:1,
+  why:"Le médiateur rend autonome et ne fait pas à la place. Si une démarche doit réellement être faite pour la personne, cela relève d'un cadre habilité et tracé : Aidants Connect."},
+ {id:"q14",lang:"js",lesson:"p2",q:"Pendant un atelier sur les mots de passe, sur quoi les participants s'entraînent-ils ?",
+  o:["Sur des exemples fictifs uniquement","Sur leurs vrais mots de passe, pour les améliorer","Sur le mot de passe du médiateur","Sur les codes de la structure"],a:0,
+  why:"Le médiateur ne demande, ne saisit et ne note jamais un vrai mot de passe. Les exemples fictifs suffisent pour apprendre la recette."},
+ {id:"q15",lang:"js",lesson:"p3",q:"Une participante découvre qu'elle a été victime d'une arnaque en ligne. Vers quel service officiel l'orienter ?",
+  o:["Un forum d'entraide en ligne","Le service client indiqué dans le message frauduleux","cybermalveillance.gouv.fr ou 17Cyber","Aucun : le médiateur règle seul la situation"],a:2,
+  why:"cybermalveillance.gouv.fr et le guichet 17Cyber accompagnent les victimes. Le médiateur écoute sans juger, aide à faire opposition si besoin, et oriente aussi vers le dépôt de plainte ou les acteurs sociaux."}
+];
+
+const N = Q.length;
+
+/* ---------- état, enregistré sur l'appareil (reprise après rechargement) ---------- */
+const KEY_STATE = "ondea-cyber-mn-quiz-state", KEY_ATT = "ondea-cyber-mn-quiz-attempts";
+const fresh = () => ({ step:"id", first:"", last:"", started:0, ended:0, perm:{}, answers:{}, cur:0, attempt:0 });
+let S = fresh();
+try{ const raw = JSON.parse(store.get(KEY_STATE) || "null"); if(raw && raw.step && Q.every(q => !raw.perm || !raw.started || Array.isArray(raw.perm[q.id]))) S = Object.assign(fresh(), raw); }catch(e){}
+const save = () => store.set(KEY_STATE, JSON.stringify(S));
+const fullName = () => S.first + " " + S.last;
+
+/* ---------- utilitaires ---------- */
+function setBar(el, pct, text){ if(!el) return; el.firstElementChild.style.width = pct + "%"; el.setAttribute("aria-valuenow", pct); el.setAttribute("aria-valuetext", text || pct + " %"); }
+function shuffle(n){ const a = [...Array(n).keys()]; for(let i = n - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+const cleanName = s => String(s || "").replace(/\s+/g, " ").trim();
+const NAME_RE = /^[\p{L}][\p{L}'’ -]{1,39}$/u;
+const capFirst = s => s.toLocaleLowerCase("fr-FR").replace(/(^|[\s'’-])(\p{L})/gu, (m, p, c) => p + c.toLocaleUpperCase("fr-FR"));
+const slug = s => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^A-Za-z0-9]+/g, "-").replace(/^-|-$/g, "");
+function fmtDate(ts){ try{ return new Intl.DateTimeFormat("fr-FR", { weekday:"long", day:"numeric", month:"long", year:"numeric", hour:"2-digit", minute:"2-digit" }).format(new Date(ts)); }catch(e){ return new Date(ts).toLocaleString(); } }
+function fmtDur(ms){ const s = Math.max(0, Math.round(ms / 1000)), m = Math.floor(s / 60); return m ? m + " min " + pad(s % 60) + " s" : s + " s"; }
+function isoDay(ts){ const d = new Date(ts); return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); }
+function refCode(){
+  const str = fullName() + "|" + S.started + "|" + Q.map(q => S.answers[q.id]).join("");
+  let h = 5381; for(let i = 0; i < str.length; i++) h = ((h << 5) + h + str.charCodeAt(i)) >>> 0;
+  const c = h.toString(36).toUpperCase().padStart(7, "0");
+  return c.slice(0, 4) + "-" + c.slice(4);
+}
+const fileName = () => "Bilan-quiz-Cyber-MN_" + slug(S.last.toUpperCase()) + "_" + slug(S.first) + "_" + isoDay(S.ended || Date.now()) + ".pdf";
+
+/* ---------- étapes ---------- */
+const ORDER = { id:0, quiz:1, result:2 };
+function show(step){
+  ["id","quiz","result"].forEach(s => { byId("step-" + s).hidden = s !== step; });
+  app.querySelectorAll(".mc-steps li").forEach(li => {
+    const on = li.dataset.step === step;
+    li.classList.toggle("mc-on", on);
+    li.classList.toggle("mc-past", ORDER[li.dataset.step] < ORDER[step]);
+    if(on) li.setAttribute("aria-current", "step"); else li.removeAttribute("aria-current");
+  });
+}
+
+/* ---------- ÉTAPE 1 : identification ---------- */
+const fFirst = byId("first"), fLast = byId("last"), startBtn = byId("startBtn");
+function checkField(input, errEl, label, showErr){
+  const v = cleanName(input.value);
+  let msg = "";
+  if(!v) msg = "Indiquez votre " + label + ".";
+  else if(v.length < 2) msg = "Votre " + label + " doit compter au moins 2 lettres.";
+  else if(!NAME_RE.test(v)) msg = "Utilisez uniquement des lettres, espaces, tirets ou apostrophes.";
+  input.classList.toggle("mc-valid", !msg);
+  if(showErr){ errEl.textContent = msg; input.setAttribute("aria-invalid", msg ? "true" : "false"); }
+  else if(!msg){ errEl.textContent = ""; input.removeAttribute("aria-invalid"); }
+  return !msg;
+}
+function refreshStart(){
+  const ok = checkField(fFirst, byId("firstErr"), "prénom", false) & checkField(fLast, byId("lastErr"), "nom", false);
+  startBtn.setAttribute("aria-disabled", ok ? "false" : "true");
+  byId("startHint").textContent = ok ? "Tout est prêt : le quiz peut commencer." : "Saisissez d'abord votre prénom et votre nom.";
+  return !!ok;
+}
+fFirst.addEventListener("input", refreshStart);
+fLast.addEventListener("input", refreshStart);
+fFirst.addEventListener("blur", () => { if(fFirst.value) checkField(fFirst, byId("firstErr"), "prénom", true); });
+fLast.addEventListener("blur", () => { if(fLast.value) checkField(fLast, byId("lastErr"), "nom", true); });
+
+byId("idForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const a = checkField(fFirst, byId("firstErr"), "prénom", true), b = checkField(fLast, byId("lastErr"), "nom", true);
+  if(!a || !b){ (a ? fLast : fFirst).focus(); toast("Prénom et nom obligatoires pour commencer"); return; }
+  S = fresh();
+  S.first = capFirst(cleanName(fFirst.value));
+  S.last = cleanName(fLast.value).toLocaleUpperCase("fr-FR");
+  let att = {}; try{ att = JSON.parse(store.get(KEY_ATT) || "{}") || {}; }catch(err){}
+  const k = slug(S.last + " " + S.first).toLowerCase();
+  att[k] = (att[k] || 0) + 1; store.set(KEY_ATT, JSON.stringify(att));
+  S.attempt = att[k];
+  Q.forEach(q => { S.perm[q.id] = shuffle(q.o.length); });
+  S.step = "quiz"; S.started = Date.now(); S.cur = 0;
+  save();
+  render(true);
+  toast("Bon courage, " + S.first + " !");
+});
+
+/* ---------- ÉTAPE 2 : questions ---------- */
+const answeredCount = () => Q.filter(q => S.answers[q.id] !== undefined).length;
+const goodCount = () => Q.filter(q => S.answers[q.id] === q.a).length;
+
+function renderQ(focus){
+  const q = Q[S.cur], ans = S.answers[q.id], locked = ans !== undefined;
+  byId("qNum").textContent = (S.cur + 1) + " / " + N;
+  byId("who").innerHTML = "Stagiaire : <b>" + esc(fullName()) + "</b>";
+  const done = answeredCount();
+  setBar(byId("qBar"), Math.round(done / N * 100), done + " questions validées sur " + N);
+  const lg = byId("qLang"); lg.className = "mc-badge mc-l-" + q.lang; lg.textContent = LNAME[q.lang];
+  byId("qRef").textContent = "Notion " + q.lesson.toUpperCase() + " du module";
+  byId("qTitle").innerHTML = '<span class="mc-sr">Question ' + (S.cur + 1) + ' sur ' + N + ' : </span>' + fmt(q.q);
+  byId("qOpts").innerHTML = S.perm[q.id].map((oi, k) =>
+    '<label class="mc-opt' + (locked ? " mc-locked" : "") + '" data-oi="' + oi + '">' +
+      '<input type="radio" name="mc-answer" value="' + oi + '"' + (locked ? " disabled" : "") + (ans === oi ? " checked" : "") + '>' +
+      '<span class="mc-opt-l" aria-hidden="true">' + "ABCD"[k] + '</span><span class="mc-opt-t">' + fmt(q.o[oi]) + '</span></label>').join("");
+  const fb = byId("qFb");
+  if(locked) paintCorrection(q, ans); else { fb.innerHTML = ""; fb.className = "mc-fb"; }
+  byId("validate").hidden = locked;
+  byId("next").hidden = !locked;
+  byId("next").textContent = S.cur === N - 1 ? "Voir mon bilan" : "Question suivante";
+  byId("liveScore").textContent = goodCount() + " sur " + done;
+  if(focus) byId("qTitle").focus({ preventScroll:false });
+}
+function paintCorrection(q, ans){
+  const ok = ans === q.a;
+  byId("qOpts").querySelectorAll(".mc-opt").forEach(l => {
+    const oi = +l.dataset.oi;
+    if(oi === q.a){ l.classList.add("mc-right"); l.insertAdjacentHTML("beforeend", '<span class="mc-opt-tag">' + (ok ? "Votre choix · juste" : "Réponse attendue") + '</span>'); }
+    else if(oi === ans){ l.classList.add("mc-wrong"); l.insertAdjacentHTML("beforeend", '<span class="mc-opt-tag">Votre choix</span>'); }
+  });
+  const fb = byId("qFb");
+  fb.className = "mc-fb " + (ok ? "mc-good" : "mc-bad");
+  fb.innerHTML = ok
+    ? "<b>Bonne réponse.</b><span>" + fmt(q.why) + "</span>"
+    : "<b>Pas tout à fait.</b><span>Réponse attendue : <strong>" + fmt(q.o[q.a]) + "</strong>. " + fmt(q.why) + "</span>";
+}
+byId("validate").addEventListener("click", () => {
+  const q = Q[S.cur], sel = byId("qOpts").querySelector("input:checked");
+  if(!sel){ const fb = byId("qFb"); fb.className = "mc-fb mc-bad"; fb.innerHTML = "<b>Choisissez d'abord une réponse.</b>"; return; }
+  S.answers[q.id] = +sel.value; save();
+  renderQ(false);
+  byId("next").focus();
+});
+byId("next").addEventListener("click", () => {
+  if(S.cur < N - 1){ S.cur++; save(); renderQ(true); window.scrollTo({ top: byId("step-quiz").offsetTop - 90, behavior:"auto" }); return; }
+  S.ended = Date.now(); S.step = "result"; save();
+  render(true);
+});
+
+/* ---------- résultats et commentaire ---------- */
+function results(){
+  let score = 0; const per = { html:{ok:0,n:0}, css:{ok:0,n:0}, js:{ok:0,n:0} }, wrong = [];
+  Q.forEach(q => { const ok = S.answers[q.id] === q.a; per[q.lang].n++; if(ok){ score++; per[q.lang].ok++; } else wrong.push(q); });
+  const pct = Math.round(score / N * 100);
+  return { score, pct, pass: pct >= PASS, per, wrong, lessons: [...new Set(wrong.map(q => q.lesson))] };
+}
+function comment(r){
+  const f = S.first; let title, text;
+  if(r.score === N){ title = "Excellent : un sans-faute"; text = "Bravo " + f + " : 15 bonnes réponses sur 15. Les trois thèmes sont acquis et vous abordez l'animation de vos ateliers de prévention dans les meilleures conditions. Pendant la révision, n'hésitez pas à aider vos voisins : expliquer une notion est la meilleure façon de la fixer."; }
+  else if(r.pct >= 85){ title = "Très bon niveau"; text = "Très beau résultat, " + f + ". Vos bases sont solides ; il reste un ou deux points de détail à vérifier pendant la révision avant d'animer vos ateliers."; }
+  else if(r.pct >= PASS){ title = "Objectif atteint"; text = "Objectif atteint, " + f + " : vous avez les bases nécessaires pour animer vos ateliers de prévention. Profitez de la révision pour consolider les notions encore fragiles indiquées ci-dessous."; }
+  else if(r.pct >= 50){ title = "Objectif presque atteint"; text = "Vous n'êtes pas loin du seuil, " + f + ". Une partie des bases est en place, mais certaines notions doivent être revues avant d'animer. Suivez la révision avec attention, en commençant par les notions indiquées ci-dessous."; }
+  else { title = "Bases à reprendre"; text = "Ce résultat montre que les bases sont encore à reprendre, " + f + ". Pas d'inquiétude : c'est précisément le rôle de la révision. Relisez les fiches séance, reprenez chaque notion indiquée ci-dessous, et votre formateur fera le point avec vous avant vos premiers ateliers."; }
+  const strong = LANGS.filter(l => r.per[l].ok === r.per[l].n).map(l => LNAME[l]);
+  const weak = LANGS.filter(l => r.per[l].ok / r.per[l].n < 0.6).map(l => LNAME[l] + " (" + r.per[l].ok + " sur " + r.per[l].n + ")");
+  if(r.score !== N && strong.length) text += " Point fort : " + strong.join(" et ") + ", sans aucune erreur.";
+  if(weak.length) text += " Point d'attention : " + weak.join(", ") + ".";
+  return { title, text };
+}
+
+function renderResult(focus){
+  const r = results(), c = comment(r);
+  const card = byId("scoreCard");
+  card.classList.toggle("mc-pass", r.pass); card.classList.toggle("mc-fail", !r.pass);
+  byId("resScore").innerHTML = r.score + " <small>/ " + N + "</small>";
+  byId("resPct").textContent = r.pct + " % de bonnes réponses";
+  byId("resVerdict").innerHTML = (r.pass
+    ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m7.5 12.5 3 3 6-6.5"/></svg>Objectif atteint'
+    : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 7v6M12 16.5v.5"/></svg>Objectif non atteint') +
+    '<span class="mc-sr"> : seuil de réussite fixé à ' + PASS + ' %</span>';
+  setBar(byId("resBar"), r.pct, r.score + " bonnes réponses sur " + N + ", " + r.pct + " %. Seuil : " + PASS + " %");
+  LANGS.forEach(l => { const p = r.per[l], pc = Math.round(p.ok / p.n * 100); byId("lmv-" + l).textContent = p.ok + " / " + p.n; setBar(byId("lmb-" + l), pc, p.ok + " sur " + p.n + ", " + pc + " %"); });
+  const cm = byId("comment"); cm.className = "mc-comment " + (r.pass ? "mc-pass" : "mc-fail");
+  byId("comTitle").textContent = c.title; byId("comText").textContent = c.text;
+  byId("lessonsWrap").hidden = !r.lessons.length;
+  byId("lessons").innerHTML = r.lessons.map(id => "<li><code>" + id.toUpperCase() + "</code> · " + esc(LESSONS[id]) + "</li>").join("");
+  const meta = fullName() + " · " + fmtDate(S.ended) + " · durée " + fmtDur(S.ended - S.started) + " · tentative n° " + S.attempt;
+  byId("resMeta").textContent = meta + " · référence " + refCode();
+  byId("printMeta").textContent = meta + " · " + PROGRAM + " · à envoyer à " + TRAINER.name;
+  byId("fileName").textContent = fileName();
+  byId("trainerName").textContent = TRAINER.name;
+  const tl = byId("teamsLink");
+  if(TRAINER.teamsEmail){ tl.hidden = false; tl.href = "https://teams.microsoft.com/l/chat/0/0?users=" + encodeURIComponent(TRAINER.teamsEmail); }
+  byId("rv").innerHTML = Q.map((q, i) => {
+    const ans = S.answers[q.id], ok = ans === q.a;
+    return '<li class="' + (ok ? "mc-ok" : "mc-ko") + '"><div class="mc-rv-meta"><span class="mc-badge ' + (ok ? "mc-ok" : "mc-ko") + '">' + (ok ? "✓ Correct" : "✗ Incorrect") + '</span><span class="mc-badge mc-l-' + q.lang + '">' + LNAME[q.lang] + '</span><span class="mc-badge">Notion ' + q.lesson.toUpperCase() + '</span></div>' +
+      '<p class="mc-rv-q">' + (i + 1) + '. ' + fmt(q.q) + '</p>' +
+      '<p>Votre réponse : ' + fmt(q.o[ans]) + '</p>' +
+      (ok ? "" : '<p><b>Réponse attendue : ' + fmt(q.o[q.a]) + '</b></p>') +
+      '<p class="mc-rv-why">' + fmt(q.why) + '</p></li>';
+  }).join("");
+  if(focus){ byId("resTitle").focus(); toast(r.pass ? "Bravo, objectif atteint !" : "Quiz terminé : " + r.score + " sur " + N); }
+}
+
+/* =====================================================================
+   BILAN PDF · A4, texte réel (sélectionnable et lisible par les
+   lecteurs d'écran), grands corps, contrastes AAA, statut écrit en
+   toutes lettres en plus des couleurs.
+   ===================================================================== */
+const WIN = "€‚ƒ„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ";
+function pdfTxt(s){
+  return String(s).normalize("NFC")
+    .replace(/[\u202F\u2009\u2007\u200B]/g, " ").replace(/[\u2212\u2010\u2011]/g, "-")
+    .replace(/→/g, "->").replace(/≥/g, ">=").replace(/≤/g, "<=")
+    .replace(/./gu, ch => { const c = ch.codePointAt(0); return (c < 256 || WIN.includes(ch)) ? ch : ""; });
+}
+function makePdf(){
+  const J = window.jspdf && window.jspdf.jsPDF;
+  if(!J){ toast("Bibliothèque PDF indisponible (hors ligne ?) : choisissez « Enregistrer au format PDF »"); setTimeout(() => window.print(), 900); return; }
+  const r = results(), c = comment(r), full = fullName(), ref = refCode();
+  const doc = new J({ unit:"mm", format:"a4", compress:true });
+  const W = 210, H = 297, M = 16, CW = W - 2 * M, BOTTOM = H - 22;
+  const C = { ink:[11,18,32], muted:[51,65,85], accent:[30,58,138], white:[255,255,255], line:[148,163,184], soft:[238,242,248], track:[203,213,225],
+    ok:[6,78,59], okBg:[209,250,229], ko:[153,27,27], koBg:[254,226,226], warn:[124,45,18], warnBg:[255,237,213],
+    html:[154,52,18], css:[30,64,175], js:[113,63,18] };
+  try{ doc.setLanguage("fr-FR"); }catch(e){}
+  doc.setProperties({ title:"Bilan du quiz de positionnement Cybersécurité Médiateur Numérique - " + pdfTxt(full), subject:"Quiz de positionnement cybersécurité avant les ateliers de prévention",
+    author:pdfTxt(full), keywords:"Médiateur Numérique, RNCP 40695, cybersécurité, arnaques, mots de passe, quiz, positionnement, MODE 83", creator:"Ondea Web Studio" });
+  try{ doc.viewerPreferences({ DisplayDocTitle:true }); }catch(e){}
+
+  const lh = pt => pt * 0.3528 * 1.42;
+  const font = (sz, st, col) => { doc.setFont("helvetica", st || "normal"); doc.setFontSize(sz); doc.setTextColor.apply(doc, col || C.ink); };
+  const fill = col => doc.setFillColor.apply(doc, col), stroke = col => doc.setDrawColor.apply(doc, col);
+  const wrap = (s, w) => doc.splitTextToSize(pdfTxt(s), w);
+  const T = (s, x, yy, o) => doc.text(Array.isArray(s) ? s : pdfTxt(s), x, yy, Object.assign({ baseline:"top" }, o || {}));
+  let y = 0;
+  function pageHead(){ fill(C.accent); doc.rect(0, 0, W, 13, "F"); font(10.5, "bold", C.white); T("Bilan du quiz de positionnement · " + full, M, 4.2); y = 22; }
+  function ensure(h){ if(y + h > BOTTOM){ doc.addPage(); pageHead(); } }
+  function heading(s, next){
+    ensure(lh(16) + 9 + (next || 14)); y += 2;
+    font(16, "bold", C.accent); T(s, M, y); y += lh(16) + .5;
+    stroke(C.accent); doc.setLineWidth(.8); doc.line(M, y, M + 26, y); y += 4.5;
+  }
+  function badge(cx, cy, rad, ok){
+    fill(ok ? C.ok : C.ko); doc.circle(cx, cy, rad, "F");
+    doc.setDrawColor(255, 255, 255); doc.setLineWidth(rad * .24); try{ doc.setLineCap("round"); doc.setLineJoin("round"); }catch(e){}
+    if(ok){ doc.lines([[rad*.35, rad*.38], [rad*.6, -rad*.75]], cx - rad*.48, cy + rad*.02, [1,1], "S", false); }
+    else { doc.line(cx - rad*.38, cy - rad*.38, cx + rad*.38, cy + rad*.38); doc.line(cx + rad*.38, cy - rad*.38, cx - rad*.38, cy + rad*.38); }
+  }
+
+  /* en-tête de la première page */
+  fill(C.accent); doc.rect(0, 0, W, 48, "F");
+  fill([29,78,216]); doc.rect(0, 46, W, 2, "F");
+  font(10.5, "bold", C.white); T("ONDEA WEB STUDIO  ·  MÉDIATEUR NUMÉRIQUE  ·  CENTRE DE FORMATION MODE 83", M, 11);
+  font(24, "bold", C.white); T("Bilan du quiz de positionnement", M, 18.5);
+  font(13.5, "normal", C.white); T("Cybersécurité — arnaques, mots de passe et accompagnement des publics", M, 31.5);
+  y = 57;
+
+  /* identité */
+  const rows = [["Stagiaire", full], ["Date du quiz", fmtDate(S.ended)], ["Durée", fmtDur(S.ended - S.started)], ["Tentative", "n° " + S.attempt],
+                ["Formation", PROGRAM], ["À envoyer à", TRAINER.name + ", en message privé sur Microsoft Teams"]];
+  font(12.5, "normal");
+  const rw = rows.map(([k, v]) => ({ k, v: wrap(v, CW - 52) }));
+  const idH = 8 + rw.reduce((a, x) => a + x.v.length * lh(12.5) + 2.2, 0);
+  fill(C.soft); stroke(C.line); doc.setLineWidth(.35); doc.roundedRect(M, y, CW, idH, 3, 3, "FD");
+  let yy = y + 5;
+  rw.forEach(x => { font(11.5, "bold", C.muted); T(x.k, M + 5, yy + .4); font(12.5, x.k === "Stagiaire" ? "bold" : "normal", C.ink); T(x.v, M + 47, yy); yy += x.v.length * lh(12.5) + 2.2; });
+  y += idH + 8;
+
+  /* score */
+  const st = r.pass ? { c:C.ok, bg:C.okBg, lab:"OBJECTIF ATTEINT" } : { c:C.ko, bg:C.koBg, lab:"OBJECTIF NON ATTEINT" };
+  const sH = 50; ensure(sH + 4);
+  fill(st.bg); stroke(st.c); doc.setLineWidth(1); doc.roundedRect(M, y, CW, sH, 3, 3, "FD");
+  font(11.5, "bold", C.muted); T("Score obtenu", M + 6, y + 5);
+  font(36, "bold", C.ink); T(r.score + " / " + N, M + 6, y + 10.5);
+  font(15, "bold", st.c); T(r.pct + " % de bonnes réponses", M + 6, y + 27.5);
+  const rx = M + CW / 2 + 6;
+  badge(rx + 5, y + 12, 5.2, r.pass);
+  font(16, "bold", st.c); T(st.lab, rx + 13, y + 8.8);
+  font(11.5, "normal", C.ink); T(wrap("Seuil de réussite : " + PASS + " %, soit 11 bonnes réponses sur 15.", CW / 2 - 22), rx + 13, y + 16.5);
+  const bx = M + 6, bw = CW - 12, by = y + 40, bh = 4.5;
+  fill(C.track); doc.roundedRect(bx, by, bw, bh, 2.2, 2.2, "F");
+  if(r.pct > 0){ fill(st.c); doc.roundedRect(bx, by, Math.max(bh, bw * r.pct / 100), bh, 2.2, 2.2, "F"); }
+  const tx = bx + bw * PASS / 100; stroke(C.ink); doc.setLineWidth(.8); doc.line(tx, by - 2, tx, by + bh + 2);
+  font(10, "bold", C.ink); T("Seuil " + PASS + " %", tx, by - 6.2, { align:"center" });
+  y += sH + 8;
+
+  /* résultats par thème */
+  heading("Résultats par thème");
+  LANGS.forEach(l => {
+    ensure(15); const p = r.per[l], pc = Math.round(p.ok / p.n * 100);
+    font(12.5, "bold", C[l]); T(LNAME[l], M, y);
+    font(12.5, "bold", C.ink); T(p.ok + " / " + p.n + "   ·   " + pc + " %", M + CW, y, { align:"right" });
+    y += lh(12.5) + .8;
+    fill(C.track); doc.roundedRect(M, y, CW, 3.4, 1.7, 1.7, "F");
+    if(pc > 0){ fill(C[l]); doc.roundedRect(M, y, Math.max(3.4, CW * pc / 100), 3.4, 1.7, 1.7, "F"); }
+    y += 8;
+  });
+
+  /* commentaire */
+  font(12.5, "normal"); const cl = wrap(c.text, CW - 16);
+  const cH = 9 + lh(13.5) + cl.length * lh(12.5);
+  heading("Commentaire de fin de quiz", cH + 2);
+  ensure(cH + 2);
+  fill(C.soft); stroke(C.line); doc.setLineWidth(.35); doc.roundedRect(M, y, CW, cH, 3, 3, "FD");
+  fill(st.c); doc.rect(M, y + .2, 2.4, cH - .4, "F");
+  font(13.5, "bold", st.c); T(c.title, M + 8, y + 4.5);
+  font(12.5, "normal", C.ink); T(cl, M + 8, y + 5 + lh(13.5));
+  y += cH + 7;
+
+  /* leçons à revoir */
+  heading("Notions du module à revoir en priorité", 12);
+  if(!r.lessons.length){ ensure(lh(12.5)); font(12.5, "normal", C.ink); T("Aucune : toutes les réponses sont justes.", M, y); y += lh(12.5) + 4; }
+  r.lessons.forEach(id => {
+    ensure(lh(12.5) + 2);
+    fill(C.warn); doc.circle(M + 1.6, y + 2.3, 1.1, "F");
+    font(12.5, "bold", C.warn); T(id.toUpperCase(), M + 5, y);
+    font(12.5, "normal", C.ink); T("— " + LESSONS[id], M + 15, y);
+    y += lh(12.5) + 1.5;
+  });
+  y += 4;
+
+  /* détail des réponses */
+  heading("Détail des 15 réponses", 38);
+  Q.forEach((q, i) => {
+    const ans = S.answers[q.id], ok = ans === q.a, tw = CW - 13, tX = M + 13;
+    font(12.5, "bold"); const ql = wrap(plain(q.q), tw);
+    font(12, ok ? "normal" : "bold"); const yl = wrap("Votre réponse : " + plain(q.o[ans]), tw);
+    font(12, "bold"); const al = ok ? [] : wrap("Réponse attendue : " + plain(q.o[q.a]), tw);
+    font(11.5, "normal"); const wl = wrap("Explication : " + plain(q.why), tw);
+    const h = lh(11) + 1 + ql.length * lh(12.5) + 1 + yl.length * lh(12) + al.length * lh(12) + wl.length * lh(11.5) + 6;
+    ensure(h);
+    badge(M + 4.6, y + 4.2, 4, ok);
+    font(11, "bold", ok ? C.ok : C.ko); T("Question " + (i + 1) + " / " + N + "  ·  " + LNAME[q.lang] + "  ·  notion " + q.lesson.toUpperCase() + "  ·  " + (ok ? "CORRECT" : "INCORRECT"), tX, y); y += lh(11) + 1;
+    font(12.5, "bold", C.ink); T(ql, tX, y); y += ql.length * lh(12.5) + 1;
+    font(12, ok ? "normal" : "bold", ok ? C.ink : C.ko); T(yl, tX, y); y += yl.length * lh(12);
+    if(al.length){ font(12, "bold", C.ok); T(al, tX, y); y += al.length * lh(12); }
+    font(11.5, "normal", C.muted); T(wl, tX, y); y += wl.length * lh(11.5) + 2.5;
+    stroke(C.track); doc.setLineWidth(.3); doc.line(tX, y, M + CW, y); y += 3.5;
+  });
+
+  /* dernière étape */
+  font(12.5, "normal"); const sl = wrap("Envoyez ce PDF en message privé à " + TRAINER.name + " sur Microsoft Teams : Conversation, nouveau message, Joindre un fichier.", CW - 16);
+  const sH2 = 8 + lh(13) + sl.length * lh(12.5);
+  ensure(sH2 + 4); y += 2;
+  fill(C.warnBg); stroke(C.warn); doc.setLineWidth(.6); doc.roundedRect(M, y, CW, sH2, 3, 3, "FD");
+  font(13, "bold", C.warn); T("Dernière étape", M + 8, y + 4);
+  font(12.5, "normal", C.ink); T(sl, M + 8, y + 4.5 + lh(13));
+
+  /* pied de page */
+  const n = doc.getNumberOfPages();
+  for(let p = 1; p <= n; p++){
+    doc.setPage(p);
+    stroke(C.line); doc.setLineWidth(.35); doc.line(M, H - 15, W - M, H - 15);
+    font(10, "normal", C.muted);
+    T("Ondea Web Studio · Quiz cybersécurité Médiateur Numérique · " + full, M, H - 11.5);
+    T("Réf. " + ref + "   ·   Page " + p + " / " + n, W - M, H - 11.5, { align:"right" });
+  }
+  doc.save(fileName());
+  toast("Bilan PDF téléchargé : envoyez-le sur Teams");
+}
+
+/* ---------- boutons du bilan ---------- */
+byId("pdfBtn").addEventListener("click", () => { try{ makePdf(); }catch(err){ console.warn(err); toast("Échec du PDF : utilisez « Imprimer ou PDF balisé »"); } });
+byId("printBtn").addEventListener("click", () => { byId("review").open = true; window.print(); });
+window.addEventListener("beforeprint", () => { const d = byId("review"); if(d) d.open = true; });
+
+/* ---------- recommencer ---------- */
+safe("réinitialisation", () => {
+  const dlg = byId("dlg"); let back = null;
+  function open(e){ back = e.currentTarget; if(typeof dlg.showModal === "function") dlg.showModal(); else dlg.setAttribute("open", ""); byId("dlgCancel").focus(); }
+  function close(){ if(dlg.open){ dlg.close ? dlg.close() : dlg.removeAttribute("open"); } if(back && !back.closest("[hidden]")) back.focus(); }
+  byId("resetAll").addEventListener("click", open);
+  byId("retry").addEventListener("click", open);
+  byId("dlgCancel").addEventListener("click", close);
+  dlg.addEventListener("cancel", e => { e.preventDefault(); close(); });
+  byId("dlgOk").addEventListener("click", () => {
+    S = fresh(); store.del(KEY_STATE);
+    fFirst.value = ""; fLast.value = "";
+    [fFirst, fLast].forEach(i => { i.removeAttribute("aria-invalid"); i.classList.remove("mc-valid"); });
+    byId("firstErr").textContent = ""; byId("lastErr").textContent = "";
+    if(dlg.open){ dlg.close ? dlg.close() : dlg.removeAttribute("open"); }
+    render(false); refreshStart(); fFirst.focus();
+    toast("Quiz remis à zéro");
+  });
+});
+
+/* ---------- rendu général ---------- */
+function render(focus){
+  show(S.step);
+  if(S.step === "id"){ if(S.first) fFirst.value = S.first; if(S.last) fLast.value = S.last; refreshStart(); if(focus) byId("idTitle").focus(); }
+  else if(S.step === "quiz") renderQ(focus);
+  else renderResult(focus);
+}
+safe("démarrage", () => {
+  render(false);
+  if(S.step === "quiz" && answeredCount()) toast("Reprise du quiz à la question " + (S.cur + 1));
+});
+
+/* ---------- pluie Matrix (derrière les textes) ---------- */
+safe("pluie Matrix", () => {
+  const KEY = "ondea-mc-matrix-v2", cv = byId("rain"), btn = byId("rainBtn");
+  const ctx = cv.getContext && cv.getContext("2d"); if(!ctx){ btn.hidden = true; return; }
+  const reduceM = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
+  let running = store.get(KEY) !== "off";
+  const SP = reduceM ? .55 : 1;
+  const G = "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワン0123456789<>/{}[];=+*#$&CYBERSMS2FA";
+  const pick = () => G[(Math.random() * G.length) | 0];
+  let W = 0, H = 0, FS = 16, cols = 0, drops = [], sp = [], raf = 0, last = 0, clearT = 0;
+  const col = { g:"#22c55e", h:"#f0fdf4" };
+  function colors(){ const cs = getComputedStyle(root); col.g = cs.getPropertyValue("--mcm-glyph").trim() || "#22c55e"; col.h = cs.getPropertyValue("--mcm-head").trim() || "#f0fdf4"; }
+  const ns = () => (.45 + Math.random() * .8) * SP;
+  function resize(){
+    const d = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    cv.width = Math.round(W * d); cv.height = Math.round(H * d);
+    ctx.setTransform(d, 0, 0, d, 0, 0);
+    FS = W < 640 ? 15 : 18;
+    const n = Math.ceil(W / FS);
+    for(let i = cols; i < n; i++){ drops[i] = Math.random() * -H / FS; sp[i] = ns(); }
+    cols = n; drops.length = n; sp.length = n;
+    ctx.font = "600 " + FS + "px 'IBM Plex Mono', ui-monospace, Consolas, monospace"; ctx.textBaseline = "top";
+  }
+  function frame(t){
+    raf = requestAnimationFrame(frame);
+    if(t - last < 40) return; last = t;
+    ctx.globalCompositeOperation = "destination-out"; ctx.fillStyle = "rgba(0,0,0,.1)"; ctx.fillRect(0, 0, W, H);
+    ctx.globalCompositeOperation = "source-over";
+    for(let i = 0; i < cols; i++){
+      const y = drops[i] * FS;
+      if(y > -FS){ ctx.globalAlpha = .9; ctx.fillStyle = col.g; ctx.fillText(pick(), i * FS, y - FS); ctx.globalAlpha = 1; ctx.fillStyle = col.h; ctx.fillText(pick(), i * FS, y); }
+      drops[i] += sp[i];
+      if(y > H && Math.random() > .97){ drops[i] = Math.random() * -20; sp[i] = ns(); }
+    }
+    ctx.globalAlpha = 1;
+  }
+  function start(){ clearTimeout(clearT); cv.classList.remove("mcm-off"); if(!raf && !document.hidden){ last = 0; raf = requestAnimationFrame(frame); } }
+  function halt(){ cancelAnimationFrame(raf); raf = 0; }
+  function stop(){ halt(); cv.classList.add("mcm-off"); clearT = setTimeout(() => { if(!running) ctx.clearRect(0, 0, W, H); }, 600); }
+  const PAUSE = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>';
+  const PLAY = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5v14l11-7z"/></svg>';
+  function paint(){ btn.innerHTML = (running ? PAUSE : PLAY) + '<span class="mc-txt">Pluie Matrix</span>'; btn.setAttribute("aria-pressed", running ? "true" : "false"); btn.setAttribute("aria-label", running ? "Pluie Matrix active. Mettre en pause" : "Pluie Matrix en pause. Reprendre"); }
+  btn.addEventListener("click", () => { running = !running; store.set(KEY, running ? "on" : "off"); running ? start() : stop(); paint(); toast(running ? "Pluie Matrix relancée" : "Pluie Matrix en pause"); });
+  if(window.MutationObserver) new MutationObserver(colors).observe(root, { attributes:true, attributeFilter:["data-mc-scheme","data-mc-contrast"] });
+  let rzT; window.addEventListener("resize", () => { clearTimeout(rzT); rzT = setTimeout(resize, 120); }, { passive:true });
+  document.addEventListener("visibilitychange", () => { if(document.hidden) halt(); else if(running) start(); });
+  colors(); resize(); paint();
+  if(running) start();
+});
+})();
+</script>
+
+<!-- Minuteur 15 minutes -->
+<style id="mc-tm-styles">
+.mc .mc-tm{position:sticky;top:var(--mc-tm-top,0px);z-index:15;display:grid;gap:.7rem;padding:.9rem 1.1rem;border:calc(var(--mc-bw) + 2px) solid var(--mc-accent);border-radius:.9rem;background:var(--mc-surface);color:var(--mc-text);box-shadow:var(--mc-shadow)}
+.mc .mc-tm-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem 1.2rem}
+.mc .mc-tm-lbl{display:flex;align-items:center;gap:.7rem;font-weight:700;font-size:1.15rem;line-height:1.3}
+.mc .mc-tm-lbl svg{width:1.8em;height:1.8em;flex:none;color:var(--mc-accent)}
+.mc .mc-tm-state{display:block;font-size:.98rem;font-weight:700;color:var(--mc-muted)}
+.mc .mc-tm-digits{font-family:var(--mc-mono);font-weight:600;font-size:2.6rem;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:.04em;color:var(--mc-text);white-space:nowrap}
+.mc .mc-tm-bar{height:1rem;border-radius:99rem;background:var(--mc-track);border:1px solid var(--mc-border);overflow:hidden}
+.mc .mc-tm-bar>span{display:block;height:100%;width:100%;background:var(--mc-accent);border-radius:inherit;transition:width .9s linear}
+.mc .mc-tm-msg{padding:.8rem 1rem;border-radius:.7rem;border:3px solid var(--mc-danger);background:var(--mc-surface);color:var(--mc-text);font-weight:700;font-size:1.1rem}
+
+/* moins de 5 minutes : orange + texte « Moins de 5 minutes » */
+.mc .mc-tm.mc-tm-warn{border-color:var(--mc-warn);background:var(--mc-warn-bg)}
+.mc .mc-tm.mc-tm-warn .mc-tm-digits,.mc .mc-tm.mc-tm-warn .mc-tm-state,.mc .mc-tm.mc-tm-warn .mc-tm-lbl svg{color:var(--mc-warn)}
+.mc .mc-tm.mc-tm-warn .mc-tm-bar>span{background:var(--mc-warn)}
+
+/* dernière minute et temps écoulé : rouge, bordure plus épaisse + texte explicite */
+.mc .mc-tm.mc-tm-crit{border-color:var(--mc-danger);border-width:calc(var(--mc-bw) + 4px);background:var(--mc-danger-bg)}
+.mc .mc-tm.mc-tm-crit .mc-tm-digits,.mc .mc-tm.mc-tm-crit .mc-tm-state,.mc .mc-tm.mc-tm-crit .mc-tm-lbl svg{color:var(--mc-danger)}
+.mc .mc-tm.mc-tm-crit .mc-tm-bar>span{background:var(--mc-danger)}
+
+/* quiz verrouillé à 00:00 */
+.mc #mc-step-quiz.mc-tm-locked .mc-opts,.mc #mc-step-quiz.mc-tm-locked .mc-qact{pointer-events:none}
+.mc #mc-step-quiz.mc-tm-locked .mc-opt{cursor:not-allowed}
+
+/* bilan : questions sans réponse */
+.mc .mc-badge.mc-tm-none{background:var(--mc-warn-bg);border-color:var(--mc-warn);color:var(--mc-warn)}
+.mc .mc-rv li.mc-tm-none{border-left-color:var(--mc-warn)}
+.mc .mc-rv .mc-tm-noans{font-weight:700;color:var(--mc-warn)}
+.mc .mc-tm-note{display:flex;gap:.8rem;align-items:flex-start;padding:1rem 1.2rem;border-radius:.8rem;border:2px solid var(--mc-warn);border-left-width:.5rem;background:var(--mc-warn-bg);color:var(--mc-text);font-size:1.05rem}
+.mc .mc-tm-note svg{width:1.6em;height:1.6em;flex:none;color:var(--mc-warn);margin-top:.1rem}
+.mc .mc-tm-note b{color:var(--mc-warn)}
+.mc .mc-tm-note:focus{outline:none}
+.mc .mc-tm-note:focus-visible{outline:.22rem solid var(--mc-focus);outline-offset:.18rem}
+
+/* contrastes renforcé et maximal */
+:root[data-mc-contrast="high"] .mc .mc-tm-bar,:root[data-mc-contrast="max"] .mc .mc-tm-bar{border-width:2px;border-color:var(--mc-text)}
+:root[data-mc-contrast="max"] .mc .mc-tm,:root[data-mc-contrast="max"] .mc .mc-tm-note{box-shadow:none;border-color:var(--mc-text)}
+:root[data-mc-contrast="max"] .mc .mc-tm.mc-tm-crit{border-width:6px}
+
+@media (max-width:40rem){.mc .mc-tm{padding:.75rem .9rem}.mc .mc-tm-digits{font-size:2.2rem}}
+@media print{.mc .mc-tm{display:none!important}.mc .mc-tm-note{break-inside:avoid}}
+</style>
+
+<script>
+(function () {
+"use strict";
+
+/* ---------- RÉGLAGE : durée du quiz ---------- */
+const DUREE = 10 * 60 * 1000;   /* 10 minutes, en millisecondes */
+
+const KEY_STATE = "ondea-cyber-mn-quiz-state";          /* état enregistré par le quiz */
+const KEY_TO    = "ondea-cyber-mn-quiz-timeout";        /* tentative arrêtée par le décompte */
+const KEY_JUST  = "ondea-cyber-mn-quiz-timeout-just";   /* le temps vient d'expirer (annonce après rechargement) */
+const PALIERS   = [600, 300, 120, 60, 30, 10];     /* annonces vocales : 10 min, 5 min, 2 min, 1 min, 30 s, 10 s */
+
+const $ = id => document.getElementById("mc-" + id);
+const app = $("app"), quiz = $("step-quiz");
+if(!app || !quiz) return;
+const mk = s => ({
+  get(k){ try{ return s.getItem(k); }catch(e){ return null; } },
+  set(k,v){ try{ s.setItem(k,v); return true; }catch(e){ return false; } },
+  del(k){ try{ s.removeItem(k); }catch(e){} }
+});
+let ls, ss;
+try{ ls = mk(window.localStorage); }catch(e){ ls = mk(null); }
+try{ ss = mk(window.sessionStorage); }catch(e){ ss = mk(null); }
+const pad = n => String(n).padStart(2, "0");
+function readState(){ try{ return JSON.parse(ls.get(KEY_STATE) || "null"); }catch(e){ return null; } }
+function enMots(s){
+  const m = Math.floor(s / 60), r = s % 60;
+  const tm = m + (m > 1 ? " minutes" : " minute"), tr = r + (r > 1 ? " secondes" : " seconde");
+  return m && r ? tm + " et " + tr : m ? tm : tr;
+}
+function safe(fn){ try{ fn(); }catch(err){ if(window.console) console.warn("[décompte]", err); } }
+
+const ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2h6"/><path d="M12 14V9.5"/><path d="M12 14l3 2"/><circle cx="12" cy="14" r="8"/></svg>';
+
+/* ---------- le panneau du décompte, en tête des questions ---------- */
+const box = document.createElement("div");
+box.className = "mc-tm"; box.id = "mc-tm"; box.hidden = true;
+box.setAttribute("role", "group"); box.setAttribute("aria-labelledby", "mc-tm-title");
+box.innerHTML =
+  '<div class="mc-tm-row">' +
+    '<p class="mc-tm-lbl">' + ICON + '<span><span id="mc-tm-title">Temps restant</span><span class="mc-tm-state" id="mc-tm-state"></span></span></p>' +
+    '<p class="mc-tm-digits" role="timer" aria-atomic="true"><span id="mc-tm-vis" aria-hidden="true">10:00</span><span class="mc-sr" id="mc-tm-sr">Il reste 10 minutes</span></p>' +
+  '</div>' +
+  '<div class="mc-tm-bar" aria-hidden="true"><span id="mc-tm-fill"></span></div>' +
+  '<p class="mc-tm-msg" id="mc-tm-msg" role="alert" hidden></p>';
+quiz.insertBefore(box, quiz.firstChild);
+
+/* zone d'annonce pour les lecteurs d'écran (hors du panneau, pour rester active sur le bilan) */
+const live = document.createElement("p");
+live.className = "mc-sr"; live.setAttribute("aria-live", "polite"); live.setAttribute("aria-atomic", "true");
+app.appendChild(live);
+let sayT;
+function say(msg){ clearTimeout(sayT); live.textContent = ""; sayT = setTimeout(() => { live.textContent = msg; }, 80); }
+
+/* ---------- placement sous la barre d'outils collante ---------- */
+const bar = app.querySelector(".mc-bar");
+let lastTop = -1;
+function placeTop(){
+  let t = 8;
+  if(bar && getComputedStyle(bar).position === "sticky") t += bar.offsetHeight;
+  if(t !== lastTop){ lastTop = t; box.style.setProperty("--mc-tm-top", t + "px"); }
+}
+
+/* ---------- état du décompte ---------- */
+let curStart = 0, localStart = 0, expired = false, announced = {}, lastS = -1;
+const running = () => !quiz.hidden;
+function startedAt(){
+  const st = readState();
+  if(st && st.started) return st.started;
+  if(!localStart) localStart = Date.now();          /* secours si le navigateur n'enregistre rien */
+  return localStart;
+}
+function initAnnounce(start){
+  const s = Math.max(0, Math.ceil((start + DUREE - Date.now()) / 1000));
+  announced = {}; PALIERS.forEach(p => { if(s <= p) announced[p] = true; });
+  if(s <= 0) return;
+  if(s >= DUREE / 1000 - 20) say("Le quiz commence : vous disposez de 10 minutes. Le temps restant est affiché en haut des questions.");
+  else say("Reprise du quiz : il reste " + enMots(s) + ".");
+}
+
+function paint(s){
+  if(s === lastS) return; lastS = s;
+  $("tm-vis").textContent = pad(Math.floor(s / 60)) + ":" + pad(s % 60);
+  $("tm-sr").textContent = s ? "Il reste " + enMots(s) : "Temps écoulé";
+  $("tm-title").textContent = s ? "Temps restant" : "Temps écoulé";
+  $("tm-state").textContent = !s ? "Le quiz est terminé" : s <= 60 ? "Dernière minute !" : s <= 300 ? "Moins de 5 minutes" : "Durée totale : 10 minutes";
+  box.classList.toggle("mc-tm-crit", s <= 60);
+  box.classList.toggle("mc-tm-warn", s > 60 && s <= 300);
+  $("tm-fill").style.width = (s / (DUREE / 1000) * 100) + "%";
+  let p = 0; PALIERS.forEach(x => { if(s <= x && !announced[x]){ announced[x] = true; p = x; } });
+  if(p && s > 0) say("Attention : il reste " + enMots(s) + ".");
+}
+
+/* ---------- à 00:00 : verrouillage puis bilan ---------- */
+function expire(){
+  if(expired) return; expired = true;
+  quiz.classList.add("mc-tm-locked");
+  quiz.querySelectorAll("input, button").forEach(el => { el.disabled = true; });
+  const st = readState();
+  let ok = false;
+  if(st && st.step === "quiz" && st.started === curStart){
+    st.step = "result"; st.ended = st.started + DUREE;
+    ok = ls.set(KEY_STATE, JSON.stringify(st)) && ls.set(KEY_TO, String(st.started));
+    if(ok) ss.set(KEY_JUST, "1");
+  }
+  const msg = $("tm-msg");
+  msg.hidden = false;
+  msg.textContent = ok
+    ? "Temps écoulé : vous ne pouvez plus répondre. Vos réponses validées sont conservées et votre bilan s'affiche dans quelques secondes."
+    : "Temps écoulé : vous ne pouvez plus répondre. Prévenez votre formateur.";
+  if(ok) setTimeout(() => location.reload(), 3500);
+}
+
+function tick(){
+  placeTop();
+  if(!running()){ box.hidden = true; localStart = 0; curStart = 0; expired = false; return; }
+  if(expired){ box.hidden = false; return; }          /* une fois à 00:00, le quiz reste verrouillé */
+  const start = startedAt();
+  if(start !== curStart){
+    curStart = start; expired = false; lastS = -1;
+    quiz.classList.remove("mc-tm-locked"); $("tm-msg").hidden = true;
+    initAnnounce(start);
+  }
+  box.hidden = false;
+  const left = start + DUREE - Date.now();
+  paint(Math.max(0, Math.ceil(left / 1000)));
+  if(left <= 0) expire();
+}
+
+/* plus aucun clic ni aucune touche sur les questions une fois le temps écoulé */
+function block(e){
+  if(!running() || !curStart || !quiz.contains(e.target)) return;
+  if(!expired && Date.now() < curStart + DUREE) return;
+  if(e.type === "keydown" && e.key === "Tab") return;
+  e.preventDefault(); e.stopImmediatePropagation(); expire();
+}
+["click", "keydown", "change", "input"].forEach(t => document.addEventListener(t, block, true));
+
+/* ---------- bilan : « Question sans réponse » ---------- */
+function timedOut(st){ return !!(st && st.step === "result" && st.started && ls.get(KEY_TO) === String(st.started)); }
+function unanswered(st, n){ const out = []; for(let i = 1; i <= n; i++){ if(!st.answers || st.answers["q" + i] === undefined) out.push(i); } return out; }
+
+function patchResult(){
+  const st = readState(), note = $("tm-note");
+  if(!timedOut(st)){ if(note) note.remove(); return; }
+  const rv = $("rv"), n = rv && rv.children.length ? rv.children.length : 15;
+  const none = unanswered(st, n);
+  if(rv) Array.from(rv.children).forEach((li, i) => {
+    if(none.indexOf(i + 1) < 0 || li.classList.contains("mc-tm-none")) return;
+    li.classList.add("mc-tm-none");
+    const b = li.querySelector(".mc-rv-meta .mc-badge");
+    if(b){ b.className = "mc-badge mc-tm-none"; b.textContent = "Sans réponse"; }
+    const p = li.children[2];
+    if(p && /^Votre r/.test(p.textContent)){ p.className = "mc-tm-noans"; p.textContent = "Question sans réponse : le temps était écoulé."; }
+  });
+  const card = $("scoreCard"); if(!card) return;
+  let el = note;
+  if(!el){
+    el = document.createElement("div"); el.id = "mc-tm-note"; el.className = "mc-tm-note"; el.tabIndex = -1;
+    const top = card.querySelector(".mc-score-top");
+    if(top && top.nextSibling) card.insertBefore(el, top.nextSibling); else card.appendChild(el);
+  }
+  const k = none.length;
+  el.innerHTML = ICON + "<p><b>Temps écoulé.</b> Le décompte de 10 minutes est arrivé à zéro avant la fin du quiz. " +
+    (k ? k + (k > 1 ? " questions sont restées sans réponse : elles comptent comme non réussies." : " question est restée sans réponse : elle compte comme non réussie.") +
+         " La réponse attendue est indiquée pour " + (k > 1 ? "chacune" : "elle") + " dans le détail des réponses et dans le bilan PDF."
+       : "Toutes les questions avaient été validées.") + "</p>";
+}
+
+/* ---------- bilan PDF : mêmes mentions dans le fichier envoyé ---------- */
+function fixPdf(txt, ctx){
+  const line = s => {
+    if(typeof s !== "string") return s;
+    if(/^Votre r.ponse : undefined$/.test(s)) return "Question sans réponse (temps écoulé)";
+    const m = s.match(/^Question (\d+) \/ \d+ .*INCORRECT$/);
+    if(m && ctx.none.indexOf(+m[1]) >= 0) return s.replace(/INCORRECT$/, "SANS RÉPONSE");
+    if(/^\d+ min \d{2} s$/.test(s)) return s + " (temps écoulé)";
+    return s;
+  };
+  return Array.isArray(txt) ? txt.map(line) : line(txt);
+}
+function hookPdf(){
+  const ns = window.jspdf;
+  if(!ns || typeof ns.jsPDF !== "function" || ns.jsPDF.__mcTm) return;
+  const Orig = ns.jsPDF;
+  function Hooked(...args){
+    const doc = new Orig(...args);
+    const st = readState();
+    if(timedOut(st) && typeof doc.text === "function"){
+      const ctx = { none: unanswered(st, 15) }, t = doc.text;
+      doc.text = function(){ const a = Array.prototype.slice.call(arguments); a[0] = fixPdf(a[0], ctx); return t.apply(this, a); };
+    }
+    return doc;
+  }
+  Object.assign(Hooked, Orig); Hooked.prototype = Orig.prototype; Hooked.__mcTm = true;
+  try{ ns.jsPDF = Hooked; }catch(e){}
+}
+document.addEventListener("click", e => { if(e.target && e.target.closest && e.target.closest("#mc-pdfBtn")) safe(hookPdf); }, true);
+document.addEventListener("DOMContentLoaded", () => safe(hookPdf));
+window.addEventListener("load", () => safe(hookPdf));
+
+/* ---------- démarrage ---------- */
+const form = $("idForm"); if(form) form.addEventListener("submit", () => setTimeout(() => safe(tick), 0));
+if(window.MutationObserver){
+  new MutationObserver(() => safe(tick)).observe(quiz, { attributes: true, attributeFilter: ["hidden"] });
+  const rv = $("rv"); if(rv) new MutationObserver(() => safe(patchResult)).observe(rv, { childList: true });
+}
+safe(patchResult);
+if(ss.get(KEY_JUST)){
+  ss.del(KEY_JUST);
+  setTimeout(() => { const n = $("tm-note"); if(n) n.focus(); }, 400);
+}
+(function loop(){ safe(tick); setTimeout(loop, 250); })();
+})();
+</script>
+<!-- ===================== FIN DU DÉCOMPTE DE 15 MINUTES ===================== -->
+
+
+
+
+<!-- vérouillage bouton Recommencer -->
+<style id="mc-rl-styles">
+.mc .mc-btn.mc-rl-on,.mc .mc-btn.mc-rl-on:hover{border:2px dashed var(--mc-muted);background:var(--mc-surface-2);color:var(--mc-muted);cursor:not-allowed}
+.mc .mc-btn.mc-rl-on svg.mc-i:not(.mc-rl-lock){display:none}
+.mc .mc-rl-time{display:none;align-items:center;gap:.35rem;font-family:var(--mc-mono);font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.mc .mc-btn.mc-rl-on .mc-rl-time{display:inline-flex}
+.mc .mc-rl-lock{width:1.1em;height:1.1em;flex:none}
+.mc .mc-rl-note{display:flex;gap:.6rem;align-items:flex-start;margin:0;padding:.75rem 1rem;border-radius:.7rem;border:2px solid var(--mc-border);background:var(--mc-surface-2);color:var(--mc-text);font-weight:700;font-size:1.02rem}
+.mc .mc-rl-note b{font-family:var(--mc-mono);font-variant-numeric:tabular-nums}
+.mc .mc-rl-note svg{width:1.3em;height:1.3em;flex:none;margin-top:.15rem;color:var(--mc-muted)}
+:root[data-mc-contrast="max"] .mc .mc-btn.mc-rl-on{border-color:var(--mc-text);color:var(--mc-text)}
+:root[data-mc-contrast="max"] .mc .mc-rl-note{border-color:var(--mc-text)}
+@media print{.mc .mc-rl-note{display:none!important}}
+</style>
+
+<script>
+(function () {
+"use strict";
+
+/* ---------- RÉGLAGE : même durée que le décompte ---------- */
+const DUREE = 10 * 60 * 1000;   /* 10 minutes, en millisecondes */
+
+const KEY_STATE = "ondea-cyber-mn-quiz-state";
+const $ = id => document.getElementById("mc-" + id);
+const app = $("app");
+if(!app) return;
+const pad = n => String(n).padStart(2, "0");
+function readState(){ try{ return JSON.parse(localStorage.getItem(KEY_STATE) || "null"); }catch(e){ return null; } }
+function enMots(s){
+  const m = Math.floor(s / 60), r = s % 60;
+  const tm = m + (m > 1 ? " minutes" : " minute"), tr = r + (r > 1 ? " secondes" : " seconde");
+  return m && r ? tm + " et " + tr : m ? tm : tr;
+}
+const LOCK = '<svg class="mc-i mc-rl-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
+
+/* les deux boutons qui relancent le quiz, et le bouton de confirmation de la fenêtre */
+const BTNS = [$("resetAll"), $("retry")].filter(Boolean);
+const OK = $("dlgOk");
+
+/* sur chaque bouton : un cadenas et le temps d'attente */
+BTNS.forEach(b => {
+  const t = document.createElement("span");
+  t.className = "mc-rl-time"; t.setAttribute("aria-hidden", "true");
+  t.innerHTML = LOCK + '<span class="mc-rl-mmss">10:00</span>';
+  b.appendChild(t);
+});
+
+/* sous « Nouvelle tentative » : une phrase qui explique le verrou */
+const retry = $("retry"); let note = null;
+if(retry && retry.parentNode){
+  note = document.createElement("p");
+  note.className = "mc-rl-note"; note.hidden = true;
+  note.innerHTML = LOCK + '<span>Nouvelle tentative possible uniquement à la fin du décompte de 10 minutes : dans <b class="mc-rl-mmss">10:00</b>.</span>';
+  retry.parentNode.insertAdjacentElement("afterend", note);
+}
+
+/* temps restant avant de pouvoir recommencer, en secondes (0 = autorisé) */
+function waitLeft(){
+  const st = readState();
+  if(!st || !st.started || (st.step !== "quiz" && st.step !== "result")) return 0;
+  return Math.max(0, Math.ceil((st.started + DUREE - Date.now()) / 1000));
+}
+
+let last = -1;
+function paint(){
+  const s = waitLeft();
+  if(s === last) return; last = s;
+  const on = s > 0, mmss = pad(Math.floor(s / 60)) + ":" + pad(s % 60);
+  BTNS.forEach(b => {
+    b.classList.toggle("mc-rl-on", on);
+    if(on){
+      b.setAttribute("aria-disabled", "true");
+      b.setAttribute("aria-label", (b.id === "mc-retry" ? "Nouvelle tentative" : "Recommencer le quiz") + " : verrouillé, disponible à la fin du décompte, dans " + enMots(s));
+    } else { b.removeAttribute("aria-disabled"); b.removeAttribute("aria-label"); }
+  });
+  app.querySelectorAll(".mc-rl-mmss").forEach(el => { el.textContent = mmss; });
+  if(note) note.hidden = !on;
+}
+
+/* message affiché si le stagiaire essaie quand même (notification du quiz, lue par les lecteurs d'écran) */
+let toastT;
+function warn(s){
+  const t = $("toast"); if(!t) return;
+  t.textContent = "Vous pourrez recommencer le quiz à la fin du décompte, dans " + enMots(s) + ".";
+  t.classList.add("mc-on"); clearTimeout(toastT);
+  toastT = setTimeout(() => t.classList.remove("mc-on"), 3500);
+}
+
+/* le verrou : on intercepte le clic avant le quiz, donc la fenêtre « Recommencer ? » ne s'ouvre pas */
+document.addEventListener("click", e => {
+  const b = e.target && e.target.closest ? e.target.closest("#mc-resetAll, #mc-retry, #mc-dlgOk") : null;
+  if(!b) return;
+  const s = waitLeft();
+  if(!s) return;
+  e.preventDefault(); e.stopImmediatePropagation();
+  if(b === OK){ const d = $("dlg"); if(d && d.open){ d.close ? d.close() : d.removeAttribute("open"); } }
+  warn(s); paint();
+}, true);
+
+(function loop(){ try{ paint(); }catch(err){ if(window.console) console.warn("[verrou]", err); } setTimeout(loop, 250); })();
+})();
+</script>
+<!-- ===================== FIN DU VERROU « RECOMMENCER » ===================== -->
+
+<!-- ===================== IMPRESSION LISIBLE (codes et textes) ===================== -->
+<style id="mc-print-fix">
+@media print{
+  /* fond des codes toujours clair, quel que soit le thème ou le contraste choisi à l'écran */
+  :root,
+  :root[data-theme],
+  :root[data-mc-theme],
+  :root[data-mc-scheme],
+  :root[data-mc-contrast]{
+    --mc-code-bg:#f1f5f9!important;
+    --mc-bw:2px!important;
+  }
+
+  /* tous les codes : noir sur gris très clair (contraste 19:1), cadre visible, graisse renforcée */
+  .mc code,
+  .mc .mc-rv code,
+  .mc .mc-rv-q code,
+  .mc .mc-rv-why code,
+  .mc .mc-comment code,
+  .mc .mc-score code{
+    background:#f1f5f9!important;
+    color:#000!important;
+    border:1.5px solid #334155!important;
+    border-radius:.25em!important;
+    padding:.05em .35em!important;
+    font-family:"IBM Plex Mono",Consolas,"Courier New",monospace!important;
+    font-size:1em!important;
+    font-weight:600!important;
+    text-shadow:none!important;
+    box-shadow:none!important;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+
+  /* codes des leçons à revoir : brun foncé sur orange pâle, comme l'étiquette qui les contient */
+  .mc .mc-lessons li code{
+    background:transparent!important;
+    border:0!important;
+    padding:0!important;
+    color:#5a1a05!important;
+    font-weight:700!important;
+  }
+
+  /* textes secondaires du bilan : plus foncés et un peu plus grands pour les malvoyants */
+  .mc .mc-rv-why,
+  .mc .mc-note,
+  .mc .mc-sub,
+  .mc .mc-pct,
+  .mc .mc-big small{
+    color:#111827!important;
+  }
+  .mc .mc-rv li{
+    background:#ffffff!important;
+    border-color:#334155!important;
+    color:#000!important;
+  }
+  .mc .mc-rv .mc-rv-q{font-size:1.08rem!important;color:#000!important}
+  .mc .mc-rv p{color:#000!important;line-height:1.6!important}
+  .mc .mc-rv .mc-rv-why{color:#1f2937!important}
+
+  /* étiquettes Correct / Incorrect / HTML / CSS / JS / Leçon : couleurs d'impression fixes et lisibles */
+  .mc .mc-badge{background:#ffffff!important;color:#000!important;border:1.5px solid #334155!important}
+  .mc .mc-badge.mc-ok{background:#d1fae5!important;color:#064e3b!important;border-color:#064e3b!important}
+  .mc .mc-badge.mc-ko{background:#fee2e2!important;color:#7f1d1d!important;border-color:#7f1d1d!important}
+  .mc .mc-badge.mc-tm-none{background:#ffedd5!important;color:#5a1a05!important;border-color:#5a1a05!important}
+  .mc .mc-badge.mc-l-html{background:#ffedd5!important;color:#7c2d12!important;border-color:#7c2d12!important}
+  .mc .mc-badge.mc-l-css{background:#dbeafe!important;color:#172554!important;border-color:#172554!important}
+  .mc .mc-badge.mc-l-js{background:#fef9c3!important;color:#422006!important;border-color:#422006!important}
+
+  /* aucun effet de flou ou de transparence ne doit passer à l'impression */
+  .mc *{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;text-shadow:none!important}
+}
+</style>
+<!-- ===================== FIN DE L'IMPRESSION LISIBLE ===================== -->
+
+<!-- ===================== IMPRESSION EN MODE CLAIR FORCÉ ===================== -->
+<script>
+(function () {
+"use strict";
+
+/* Avant l'impression : on passe la page en clair, contraste standard.
+   Après l'impression : on remet exactement les réglages du stagiaire. */
+const root = document.documentElement;
+const ATTRS = ["data-mc-theme", "data-theme", "data-mc-scheme", "data-mc-contrast"];
+let saved = null;
+
+/* styles posés directement sur chaque élément (priorité maximale) */
+const CODE = {
+  "background-color": "#f1f5f9",
+  "color": "#000000",
+  "-webkit-text-fill-color": "#000000",
+  "border": "1.5px solid #334155",
+  "border-radius": ".25em",
+  "padding": ".05em .35em",
+  "font-weight": "600",
+  "text-shadow": "none",
+  "filter": "none"
+};
+const CODE_LESSON = {
+  "background-color": "transparent",
+  "color": "#5a1a05",
+  "-webkit-text-fill-color": "#5a1a05",
+  "border": "0",
+  "padding": "0",
+  "font-weight": "700",
+  "text-shadow": "none",
+  "filter": "none"
+};
+
+function setAll(el, props){
+  Object.keys(props).forEach(p => el.style.setProperty(p, props[p], "important"));
+}
+
+function before(){
+  if(saved) return;
+  saved = { attrs: {}, scheme: root.style.getPropertyValue("color-scheme"), els: [] };
+  ATTRS.forEach(a => { saved.attrs[a] = root.getAttribute(a); });
+
+  /* thème clair + contraste standard le temps de l'impression */
+  root.setAttribute("data-mc-theme", "light");
+  root.setAttribute("data-mc-scheme", "light");
+  if(root.hasAttribute("data-theme")) root.setAttribute("data-theme", "light");
+  root.removeAttribute("data-mc-contrast");
+  root.style.setProperty("color-scheme", "light", "important");
+
+  /* chaque code du bilan : noir sur gris très clair */
+  document.querySelectorAll("#mc-step-result code, #mc-printMeta code").forEach(el => {
+    saved.els.push([el, el.getAttribute("style")]);
+    setAll(el, el.closest(".mc-lessons") ? CODE_LESSON : CODE);
+  });
+}
+
+function after(){
+  if(!saved) return;
+  ATTRS.forEach(a => {
+    if(saved.attrs[a] === null) root.removeAttribute(a);
+    else root.setAttribute(a, saved.attrs[a]);
+  });
+  if(saved.scheme) root.style.setProperty("color-scheme", saved.scheme);
+  else root.style.removeProperty("color-scheme");
+  saved.els.forEach(([el, st]) => { if(st === null) el.removeAttribute("style"); else el.setAttribute("style", st); });
+  saved = null;
+}
+
+window.addEventListener("beforeprint", before);
+window.addEventListener("afterprint", after);
+
+/* secours pour Safari et les anciens navigateurs */
+if(window.matchMedia){
+  const mq = matchMedia("print");
+  const fn = e => { e.matches ? before() : after(); };
+  mq.addEventListener ? mq.addEventListener("change", fn) : mq.addListener(fn);
+}
+})();
+</script>
+<!-- ===================== FIN DE L'IMPRESSION EN MODE CLAIR FORCÉ ===================== -->
+<!-- ===== AJOUT : style premium « époustouflant » (charte HTML · CSS · JS) + bouton retour en haut sonore ===== -->
+<div class="wow-aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="wow-spot" id="wow-spot" aria-hidden="true"></div>
+<div class="wow-arrival" id="wow-arrival" aria-hidden="true"></div>
+<button class="wow-top" id="wow-top" type="button" aria-label="Retour en haut de la page" title="Retour en haut de la page">
+  <svg class="wow-top-ring" viewBox="0 0 48 48" aria-hidden="true"><circle class="t" cx="24" cy="24" r="21"/><circle class="f" id="wow-topRing" cx="24" cy="24" r="21" stroke-dasharray="131.95" stroke-dashoffset="131.95"/></svg>
+  <svg class="wow-top-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5"/></svg>
+</button>
+<style>
+  @property --wow-ang{syntax:'<angle>';initial-value:0deg;inherits:false}
+
+  /* ── Fonds vivants : aurore aux couleurs du trio + halo qui suit la souris (derrière les textes, devant la pluie Matrix) */
+  .wow-aurora{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  .wow-aurora i{position:absolute;width:60vmax;height:60vmax;border-radius:50%}
+  .wow-aurora i:nth-child(1){top:-25vmax;right:-18vmax;background:radial-gradient(circle,var(--wow-a-css),transparent 62%);animation:wow-drift1 26s ease-in-out infinite alternate}
+  .wow-aurora i:nth-child(2){top:35vh;left:-25vmax;background:radial-gradient(circle,var(--wow-a-html),transparent 62%);animation:wow-drift2 32s ease-in-out infinite alternate}
+  .wow-aurora i:nth-child(3){bottom:-30vmax;right:10vw;background:radial-gradient(circle,var(--wow-a-js),transparent 62%);animation:wow-drift3 38s ease-in-out infinite alternate}
+  .wow-spot{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .6s;
+    background:radial-gradient(600px circle at var(--cx,50%) var(--cy,-20%),var(--wow-spot),transparent 60%)}
+  .wow-spot.on{opacity:1}
+
+  /* ── Barre du haut : reflet tricolore qui balaie le filet du bas */
+  .mc .mc-bar{overflow:hidden}
+  .mc .mc-bar::after{content:"";position:absolute;bottom:0;left:0;width:30%;height:2px;pointer-events:none;
+    background:linear-gradient(90deg,transparent,var(--mc-html),var(--mc-css),var(--mc-js),transparent);animation:wow-sweep 7s linear infinite}
+
+  /* ── En-tête : titre balayé par les couleurs HTML · CSS · JS, chiffres clés vivants */
+  .mc .mc-hero h1{background:linear-gradient(90deg,var(--mc-text) 0%,var(--mc-text) 30%,var(--mc-html) 40%,var(--mc-css) 50%,var(--mc-js) 60%,var(--mc-text) 70%,var(--mc-text) 100%);
+    background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:wow-shimmer 7s linear infinite}
+  .mc .mc-hero .mc-word{transition:translate .3s,box-shadow .3s}
+  .mc .mc-hero .mc-word:hover{translate:0 -2px;box-shadow:0 6px 16px var(--wow-ring)}
+  .mc .mc-fact{transition:translate .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s,border-color .4s}
+  .mc .mc-fact:hover{translate:0 -4px;border-color:var(--mc-accent);box-shadow:var(--wow-card-sh)}
+  .mc .mc-fact b{display:inline-block;transition:scale .3s}
+  .mc .mc-fact:hover b{scale:1.08}
+  .mc .mc-steps li{transition:border-color .3s,box-shadow .4s}
+  .mc .mc-steps li.mc-on{box-shadow:0 0 0 4px var(--wow-ring),0 0 22px var(--wow-glow)}
+  .mc .mc-steps li.mc-on span{animation:wow-beat 2.2s ease-in-out infinite}
+
+  /* ── Entrée orchestrée de l'en-tête après le rideau (uniquement si l'intro est active) */
+  html.wow{--wb:8.15s}
+  html.wow.wow-skip{--wb:0s}
+  html.wow .mc .mc-bar{animation:wow-in-down .8s cubic-bezier(.2,.8,.2,1) calc(var(--wb) + 0s) both}
+  html.wow .mc .mc-kicker{animation:wow-in-left .9s cubic-bezier(.2,.8,.2,1) calc(var(--wb) + .1s) both}
+  html.wow .mc .mc-hero h1{animation:wow-clip 1.15s cubic-bezier(.2,.8,.2,1) calc(var(--wb) + .2s) both,wow-shimmer 7s linear calc(var(--wb) + 1.4s) infinite}
+  html.wow .mc .mc-lead{animation:wow-in-up .9s cubic-bezier(.2,.8,.2,1) calc(var(--wb) + .45s) both}
+  html.wow .mc .mc-fact{animation:wow-rise .8s cubic-bezier(.2,.8,.2,1) both}
+  html.wow .mc .mc-fact:nth-child(1){animation-delay:calc(var(--wb) + .6s)}
+  html.wow .mc .mc-fact:nth-child(2){animation-delay:calc(var(--wb) + .7s)}
+  html.wow .mc .mc-fact:nth-child(3){animation-delay:calc(var(--wb) + .8s)}
+  html.wow .mc .mc-fact:nth-child(4){animation-delay:calc(var(--wb) + .9s)}
+  html.wow .mc .mc-steps{animation:wow-in-up .8s cubic-bezier(.2,.8,.2,1) calc(var(--wb) + 1s) both}
+
+  /* ── Apparitions au défilement : flou → net */
+  .mc .wow-rv{opacity:0;transform:translateY(26px) scale(.985);filter:blur(8px);
+    transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1),filter .9s ease}
+  .mc .wow-rv.in{opacity:1;transform:none;filter:none}
+
+  /* ── Cartes : projecteur qui suit la souris, liseré lumineux au survol */
+  .mc .mc-card{position:relative;isolation:isolate;transition:translate .4s cubic-bezier(.2,.8,.2,1),box-shadow .45s,border-color .45s}
+  .mc .mc-card::before{content:"";position:absolute;inset:0;border-radius:inherit;z-index:-1;pointer-events:none;
+    opacity:0;transition:opacity .4s;background:radial-gradient(360px circle at var(--sx,50%) var(--sy,50%),var(--wow-card-spot),transparent 65%)}
+  .mc .mc-card:hover::before{opacity:1}
+  .mc .mc-block:hover{border-color:var(--mc-accent);box-shadow:var(--wow-card-sh)}
+
+  /* Carte d'identification et carte du score : bordure de lumière tricolore qui tourne */
+  
+.mc #mc-step-id::after,
+.mc .mc-score::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px;
+    pointer-events: none;
+
+    background: conic-gradient(
+        from var(--wow-ang),
+        transparent 0 55%,
+        var(--mc-html) 68%,
+        var(--mc-css) 80%,
+        var(--mc-js) 92%,
+        transparent 100%
+    );
+
+    /* Compatibilité avec les navigateurs WebKit */
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+
+    /* Propriété standard */
+    mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    mask-composite: exclude;
+
+    /* Animation de la bordure lumineuse */
+    animation: wow-ang 8s linear infinite;
+}
+
+
+  /* ── Questions : réponses qui réagissent ; bonne réponse qui « claque », mauvaise qui tremble */
+  .mc .mc-opt{transition:border-color .2s,background .2s,translate .25s cubic-bezier(.2,.8,.2,1),box-shadow .3s}
+  .mc .mc-opt:not(.mc-locked):hover{translate:4px 0;box-shadow:0 6px 18px var(--wow-ring)}
+  .mc .mc-opt-l{transition:background .25s,color .25s,border-color .25s,scale .25s}
+  .mc .mc-opt:not(.mc-locked):hover .mc-opt-l{scale:1.1;border-color:var(--mc-accent)}
+  .mc .mc-opt.mc-right{animation:wow-good .55s cubic-bezier(.2,1.5,.3,1);box-shadow:0 0 0 3px var(--mc-success-bg),0 0 22px color-mix(in srgb,var(--mc-success) 35%,transparent)}
+  .mc .mc-opt.mc-wrong{animation:wow-shake .45s ease}
+  .mc .mc-q{animation:wow-in-up .5s cubic-bezier(.2,.8,.2,1) both}
+
+  /* ── Jauges et score : reflet qui glisse, score lumineux */
+  .mc .mc-meter>span{position:relative;overflow:hidden}
+  .mc .mc-meter>span::after{content:"";position:absolute;top:0;bottom:0;left:0;width:40%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);animation:wow-sweep 2.8s ease-in-out infinite}
+  .mc .mc-big{text-shadow:0 0 30px var(--wow-glow)}
+  .mc .mc-score.mc-pass{animation:wow-pass 2.6s ease-in-out infinite}
+  .mc .mc-btn{transition:background .2s,border-color .2s,color .2s,box-shadow .3s}
+  .mc .mc-btn:hover{box-shadow:0 0 0 3px var(--wow-ring)}
+  .mc .mc-btn-solid:not(:disabled){animation:wow-glow-pulse 2.6s ease-in-out infinite}
+  .mc input[type="text"],.mc input:not([type]){transition:border-color .3s,box-shadow .3s}
+  .mc input[type="text"]:focus,.mc input:not([type]):focus{box-shadow:0 0 0 4px var(--wow-ring),0 0 22px var(--wow-glow)}
+
+  /* ── Bouton retour en haut (nouveau) : anneau de progression, onde lumineuse, envol de la flèche */
+  .wow-top{position:fixed;right:1rem;bottom:calc(1rem + env(safe-area-inset-bottom,0px));z-index:1990;width:3.4rem;height:3.4rem;padding:0;border-radius:50%;
+    display:grid;place-items:center;cursor:pointer;background:var(--mc-accent);color:var(--mc-on-accent);border:.2rem solid var(--mc-surface);
+    box-shadow:0 0 0 .15rem var(--mc-text),0 .6rem 1.6rem rgba(0,0,0,.35);opacity:0;visibility:hidden;transform:translateY(1rem) scale(.8);
+    transition:opacity .35s,visibility .35s,transform .45s cubic-bezier(.2,1.4,.3,1),background .2s}
+  .wow-top.on{opacity:1;visibility:visible;transform:none}
+  .wow-top:hover{background:var(--mc-accent-strong);transform:translateY(-.2rem)}
+  .wow-top:focus-visible{outline:.25rem solid var(--mc-focus);outline-offset:.35rem}
+  .wow-top-ring{position:absolute;inset:.2rem;width:calc(100% - .4rem);height:calc(100% - .4rem);transform:rotate(-90deg)}
+  .wow-top-ring circle{fill:none;stroke:currentColor;stroke-width:3}
+  .wow-top-ring .t{stroke-opacity:.25}
+  .wow-top-ring .f{stroke-linecap:round;transition:stroke-dashoffset .12s linear}
+  .wow-top-arrow{width:1.4rem;height:1.4rem;position:relative}
+  .wow-top.on::after{content:"";position:absolute;inset:-.45rem;border-radius:50%;border:2px solid var(--mc-accent);pointer-events:none;animation:wow-ping 2.4s ease-out infinite}
+  .wow-top.launch .wow-top-arrow{animation:wow-launch .9s cubic-bezier(.5,0,.2,1)}
+  :root[data-mc-contrast="max"] .wow-top{box-shadow:0 0 0 .2rem var(--mc-text)}
+  .wow-spark{position:fixed;z-index:1995;width:.45rem;height:.45rem;border-radius:50%;pointer-events:none;
+    background:var(--c);box-shadow:0 0 .5rem var(--c);animation:wow-spark .8s ease-out forwards}
+  .wow-arrival{position:fixed;left:0;right:0;top:0;height:.3rem;z-index:2000;pointer-events:none;
+    background:linear-gradient(90deg,transparent,var(--mc-html),var(--mc-css),var(--mc-js),transparent);transform:scaleX(0);opacity:0}
+  .wow-arrival.go{animation:wow-arrive 1.1s cubic-bezier(.2,.8,.2,1)}
+  @media print{.wow-top,.wow-aurora,.wow-spot,.wow-arrival,.wow-intro{display:none!important}}
+
+  /* ── Changement de thème : révélation circulaire depuis le bouton */
+  ::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
+
+  /* ── Contraste renforcé ou maximal : on retire les effets décoratifs pour garder la lisibilité */
+  :root[data-mc-contrast] .wow-aurora,:root[data-mc-contrast] .wow-spot,
+  :root[data-mc-contrast] .mc .mc-bar::after,:root[data-mc-contrast] .mc #mc-step-id::after,:root[data-mc-contrast] .mc .mc-score::after,
+  :root[data-mc-contrast] .mc .mc-meter>span::after,:root[data-mc-contrast] .mc .mc-card::before{display:none}
+  :root[data-mc-contrast] .mc .mc-hero h1{background:none;color:inherit;-webkit-background-clip:border-box;background-clip:border-box}
+  html.wow[data-mc-contrast] .mc .mc-hero h1{animation:wow-clip 1.15s cubic-bezier(.2,.8,.2,1) calc(var(--wb) + .2s) both}
+
+  @keyframes wow-drift1{to{transform:translate(-12vmax,10vmax) scale(1.15)}}
+  @keyframes wow-drift2{to{transform:translate(14vmax,-8vmax) scale(1.2)}}
+  @keyframes wow-drift3{to{transform:translate(-10vmax,-12vmax) scale(.9)}}
+  @keyframes wow-sweep{from{transform:translateX(-100%)}to{transform:translateX(340%)}}
+  @keyframes wow-shimmer{from{background-position:100% 0}to{background-position:-200% 0}}
+  @keyframes wow-ang{to{--wow-ang:360deg}}
+  @keyframes wow-in-left{from{opacity:0;translate:-30px 0;filter:blur(5px)}to{opacity:1;translate:0 0;filter:none}}
+  @keyframes wow-in-up{from{opacity:0;translate:0 30px;filter:blur(6px)}to{opacity:1;translate:0 0;filter:none}}
+  @keyframes wow-in-down{from{opacity:0;translate:0 -100%}to{opacity:1;translate:0 0}}
+  @keyframes wow-rise{from{opacity:0;translate:0 40px;scale:.97;filter:blur(8px)}to{opacity:1;translate:0 0;scale:1;filter:none}}
+  @keyframes wow-clip{from{opacity:0;translate:0 34px;clip-path:polygon(-10% 130%,110% 130%,110% 130%,-10% 130%)}
+    to{opacity:1;translate:0 0;clip-path:polygon(-10% -30%,110% -30%,110% 130%,-10% 130%)}}
+  @keyframes wow-beat{0%,100%{scale:1}50%{scale:1.12}}
+  @keyframes wow-good{0%{scale:.97}55%{scale:1.03}100%{scale:1}}
+  @keyframes wow-shake{0%,100%{translate:0 0}20%{translate:-6px 0}40%{translate:6px 0}60%{translate:-4px 0}80%{translate:3px 0}}
+  @keyframes wow-pass{0%,100%{box-shadow:var(--mc-shadow)}50%{box-shadow:var(--mc-shadow),0 0 0 6px color-mix(in srgb,var(--mc-success) 18%,transparent),0 0 30px color-mix(in srgb,var(--mc-success) 30%,transparent)}}
+  @keyframes wow-glow-pulse{0%,100%{box-shadow:0 0 0 0 var(--wow-glow)}50%{box-shadow:0 0 0 6px transparent,0 0 24px var(--wow-glow)}}
+  @keyframes wow-ping{0%{opacity:.8;scale:1}100%{opacity:0;scale:1.5}}
+  @keyframes wow-launch{0%{transform:none}35%{transform:translateY(-2.6rem);opacity:0}36%{transform:translateY(2rem);opacity:0}100%{transform:none;opacity:1}}
+  @keyframes wow-spark{to{transform:translate(var(--x),var(--y)) scale(.2);opacity:0}}
+  @keyframes wow-arrive{0%{transform:scaleX(0);opacity:1}55%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
+
+  @media (prefers-reduced-motion:reduce){
+    .wow-aurora,.wow-spot,.mc .mc-bar::after,.mc .mc-meter>span::after{display:none}
+    .mc .wow-rv{opacity:1!important;transform:none!important;filter:none!important;transition:none!important}
+    .mc .mc-hero h1,.mc #mc-step-id::after,.mc .mc-score::after,.mc .mc-steps li.mc-on span,.mc .mc-opt.mc-right,.mc .mc-opt.mc-wrong,.mc .mc-q,
+    .mc .mc-score.mc-pass,.mc .mc-btn-solid,.wow-top.on::after,.wow-top.launch .wow-top-arrow,.wow-arrival.go{animation:none!important}
+    .mc .mc-fact:hover,.mc .mc-opt:hover,.mc .mc-hero .mc-word:hover{translate:none}
+    .wow-top{transition:opacity .2s,visibility .2s}.wow-top.on,.wow-top:hover{transform:none}
+  }
+</style>
+<script>
+(function(){
+  "use strict";
+  var root=document.documentElement;
+  var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var fine=window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  function y(){return window.scrollY||root.scrollTop||0;}
+
+  /* Intro : clic ou touche pour passer, retrait automatique */
+  var intro=document.getElementById("wow-intro");
+  if(intro&&root.classList.contains("wow")){
+    var skip=function(){root.classList.add("wow-skip");window.removeEventListener("keydown",skip);};
+    intro.addEventListener("click",skip);
+    window.addEventListener("keydown",skip);
+    setTimeout(function(){window.removeEventListener("keydown",skip);if(intro.parentNode)intro.parentNode.removeChild(intro);},9400);
+  }
+
+  /* Apparitions au défilement (blocs du quiz, bilan) */
+  var items=[].slice.call(document.querySelectorAll(".mc .mc-block,.mc .mc-stack > *"));
+  if(reduce||!("IntersectionObserver" in window)){
+    items.forEach(function(el){el.classList.add("in");});
+  }else{
+    items.forEach(function(el){el.classList.add("wow-rv");});
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}
+    });},{threshold:.04,rootMargin:"0px 0px -4% 0px"});
+    items.forEach(function(el){io.observe(el);});
+  }
+
+  /* Halo de fond + projecteur des cartes qui suivent la souris */
+  if(!reduce&&fine){
+    var spot=document.getElementById("wow-spot"),mx=0,my=0,mt=null,mr=0;
+    window.addEventListener("pointermove",function(e){
+      mx=e.clientX;my=e.clientY;mt=e.target;
+      if(!mr)mr=requestAnimationFrame(function(){
+        mr=0;
+        if(spot){spot.style.setProperty("--cx",mx+"px");spot.style.setProperty("--cy",my+"px");spot.classList.add("on");}
+        var c=mt&&mt.closest?mt.closest(".mc .mc-card"):null;
+        if(c){var r=c.getBoundingClientRect();c.style.setProperty("--sx",(mx-r.left)+"px");c.style.setProperty("--sy",(my-r.top)+"px");}
+      });
+    },{passive:true});
+    document.addEventListener("pointerleave",function(){if(spot)spot.classList.remove("on");});
+  }
+
+  /* Changement de thème : révélation circulaire depuis le bouton.
+     Le bouton d'origine fait tout le travail ; on l'enveloppe simplement dans la transition. */
+  var tb=document.getElementById("mc-themeBtn"),replay=false;
+  if(tb&&document.startViewTransition&&!reduce){
+    tb.addEventListener("click",function(e){
+      if(replay)return;
+      e.stopImmediatePropagation();
+      var r=tb.getBoundingClientRect(),x=r.left+r.width/2,cy=r.top+r.height/2;
+      var R=Math.hypot(Math.max(x,window.innerWidth-x),Math.max(cy,window.innerHeight-cy));
+      var vt=document.startViewTransition(function(){replay=true;try{tb.click();}finally{replay=false;}});
+      vt.ready.then(function(){
+        root.animate({clipPath:["circle(0px at "+x+"px "+cy+"px)","circle("+R+"px at "+x+"px "+cy+"px)"]},
+          {duration:750,easing:"cubic-bezier(.7,0,.3,1)",pseudoElement:"::view-transition-new(root)"});
+      }).catch(function(){});
+    },true);
+  }
+
+  /* ── Bouton retour en haut : anneau de progression, deux sons, étincelles, arrivée lumineuse */
+  var btt=document.getElementById("wow-top"),ring=document.getElementById("wow-topRing"),arr=document.getElementById("wow-arrival");
+  if(btt&&ring){
+    var LEN=131.95,pending=false,raf=0;
+    var update=function(){
+      raf=0;
+      var m=Math.max(1,root.scrollHeight-window.innerHeight),p=Math.min(1,y()/m);
+      ring.style.strokeDashoffset=(LEN*(1-p)).toFixed(2);
+      btt.classList.toggle("on",y()>400||pending);
+      if(pending&&y()<1){                /* tout en haut, jamais avant */
+        pending=false;soundArrive();
+        btt.classList.remove("on");
+        if(arr&&!reduce){arr.classList.remove("go");void arr.offsetWidth;arr.classList.add("go");}
+      }
+    };
+    window.addEventListener("scroll",function(){if(!raf)raf=requestAnimationFrame(update);},{passive:true});
+    if("onscrollend" in window)window.addEventListener("scrollend",update,{passive:true});
+    window.addEventListener("resize",update,{passive:true});
+    update();
+
+    var ac=null;
+    var ctx=function(){
+      if(!ac){var C=window.AudioContext||window.webkitAudioContext;if(!C)return null;ac=new C();}
+      if(ac.state==="suspended")ac.resume();
+      return ac;
+    };
+    /* Son 1 : envol au clic (glissando montant + souffle) */
+    var soundStart=function(){
+      var a=ctx();if(!a)return;var t=a.currentTime;
+      var o=a.createOscillator(),g=a.createGain();o.type="triangle";
+      o.frequency.setValueAtTime(260,t);o.frequency.exponentialRampToValueAtTime(1040,t+.38);
+      g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.22,t+.04);g.gain.exponentialRampToValueAtTime(.0001,t+.45);
+      o.connect(g).connect(a.destination);o.start(t);o.stop(t+.5);
+      var len=Math.floor(a.sampleRate*.5),buf=a.createBuffer(1,len,a.sampleRate),d=buf.getChannelData(0);
+      for(var k=0;k<len;k++)d[k]=(Math.random()*2-1)*(1-k/len);
+      var n=a.createBufferSource(),f=a.createBiquadFilter(),ng=a.createGain();
+      n.buffer=buf;f.type="bandpass";f.Q.value=1.2;
+      f.frequency.setValueAtTime(500,t);f.frequency.exponentialRampToValueAtTime(4000,t+.45);
+      ng.gain.setValueAtTime(.0001,t);ng.gain.exponentialRampToValueAtTime(.12,t+.06);ng.gain.exponentialRampToValueAtTime(.0001,t+.5);
+      n.connect(f).connect(ng).connect(a.destination);n.start(t);
+    };
+    /* Son 2 : carillon à l'arrivée (do – sol – do aigu) */
+    function soundArrive(){
+      var a=ctx();if(!a)return;var t=a.currentTime;
+      [[1046.5,0],[1568,.12],[2093,.24]].forEach(function(nt){
+        [1,2.76].forEach(function(h,j){
+          var o=a.createOscillator(),g=a.createGain();o.type="sine";o.frequency.value=nt[0]*h;
+          var s=t+nt[1],v=j?.04:.16;
+          g.gain.setValueAtTime(.0001,s);g.gain.exponentialRampToValueAtTime(v,s+.015);g.gain.exponentialRampToValueAtTime(.0001,s+1.3);
+          o.connect(g).connect(a.destination);o.start(s);o.stop(s+1.35);
+        });
+      });
+    }
+    var cols=["var(--mc-html)","var(--mc-css)","var(--mc-js)"];
+    var sparks=function(){
+      if(reduce)return;var r=btt.getBoundingClientRect(),cx=r.left+r.width/2,cy2=r.top+r.height/2;
+      for(var k=0;k<15;k++){
+        var s=document.createElement("span");s.className="wow-spark";
+        var an=Math.PI*2*k/15,dd=40+Math.random()*30;
+        s.style.left=cx+"px";s.style.top=cy2+"px";s.style.setProperty("--c",cols[k%3]);
+        s.style.setProperty("--x",Math.cos(an)*dd+"px");s.style.setProperty("--y",Math.sin(an)*dd+"px");
+        document.body.appendChild(s);setTimeout(function(el){el.remove();}.bind(null,s),850);
+      }
+    };
+    btt.addEventListener("click",function(){
+      if(y()<1)return;                   /* déjà en haut : aucun son */
+      soundStart();sparks();
+      btt.classList.remove("launch");void btt.offsetWidth;btt.classList.add("launch");
+      pending=true;
+      window.scrollTo({top:0,behavior:reduce?"auto":"smooth"});
+    });
+    /* Si l'on redescend pendant la remontée, le carillon est annulé */
+    var cancel=function(){if(pending&&y()>=1)pending=false;};
+    window.addEventListener("wheel",function(e){if(e.deltaY>0)cancel();},{passive:true});
+    window.addEventListener("touchmove",cancel,{passive:true});
+    window.addEventListener("keydown",function(e){if(["ArrowDown","PageDown","End"," "].indexOf(e.key)>-1)cancel();});
+  }
+})();
+</script>
+<!-- ===== FIN AJOUT style premium ===== -->
+
+<!-- ===================== IMPRESSION : effets d'écran neutralisés ===================== -->
+<style id="mc-print-fix">
+@media print{
+  /* les blocs qui apparaissent au défilement sont tous visibles sur papier */
+  .mc .wow-rv{opacity:1!important;transform:none!important;filter:none!important}
+  /* aucune animation ni transition pendant l'impression */
+  .mc *,.mc *::before,.mc *::after{animation:none!important;transition:none!important}
+  /* liserés et halos décoratifs (dégradés coniques masqués) retirés : ils couvraient le bilan */
+  .mc #mc-step-id::after,.mc .mc-score::after,.mc .mc-bar::after,
+  .mc .mc-card::before,.mc .mc-meter>span::after{content:none!important;display:none!important}
+  /* le bilan peut commencer sur la 1re page : on garde seulement ses sous-blocs entiers */
+  .mc .mc-card.mc-score{break-inside:auto}
+  .mc .mc-score-top,.mc .mc-gauge,.mc .mc-lms,.mc .mc-comment,.mc #mc-lessonsWrap{break-inside:avoid}
+  .mc .mc-lessons{display:block!important}
+  .mc .mc-lessons li{display:inline-block!important;margin:0 .4rem .45rem 0!important}
+}
+</style>
+<!-- ===================== FIN IMPRESSION : effets d'écran neutralisés ===================== -->
+
+<!-- ===================== AJOUT : QR code Ko-fi « effet waouh » à droite des textes de l'en-tête ===================== -->
+<style id="mc-qr-styles">
+@property --mcqr-ang{syntax:'<angle>';initial-value:0deg;inherits:true}
+
+/* ── mise en page : textes à gauche, QR centré dans l'espace libre à droite */
+.mc .mc-hero-txt.mc-qr-on{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:1.5rem;align-items:start}
+.mc .mc-hero-txt.mc-qr-on > :not(.mc-qr){grid-column:1}
+
+/* ── couleurs propres au QR, en clair et en sombre */
+.mc .mc-qr{
+  --qr-a:var(--mc-html);--qr-b:var(--mc-css);--qr-c:var(--mc-js);
+  --qr-halo:.5;--qr-glow:rgba(37,99,235,.35);--qr-heart:#ff5e5b;
+  --qr-tag-bg:color-mix(in srgb,var(--mc-surface) 88%,transparent);
+}
+:root[data-mc-scheme="dark"] .mc .mc-qr{--qr-halo:.75;--qr-glow:rgba(147,197,253,.45)}
+
+/* ── conteneur cliquable */
+.mc .mc-qr{grid-column:2;grid-row:1 / span 3;justify-self:center;align-self:center;position:relative;
+  display:grid;justify-items:center;gap:1.1rem;padding:1.6rem 1.2rem 1rem;text-decoration:none;color:var(--mc-text);
+  perspective:900px;-webkit-tap-highlight-color:transparent;isolation:isolate}
+.mc a.mc-qr:focus-visible{outline:.25rem solid var(--mc-focus);outline-offset:.2rem;border-radius:1.6rem}
+
+/* ── bloc qui flotte et s'incline selon la souris */
+.mc .mc-qr-tilt{position:relative;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transform-style:preserve-3d;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1);animation:mcqr-float 6s ease-in-out infinite}
+
+/* halo tricolore qui tourne derrière */
+.mc .mc-qr-halo{position:absolute;inset:-26%;z-index:-1;border-radius:50%;pointer-events:none;
+  background:conic-gradient(from var(--mcqr-ang),var(--qr-a),var(--qr-b),var(--qr-c),var(--qr-a));
+  filter:blur(30px);opacity:var(--qr-halo);animation:mcqr-spin 9s linear infinite,mcqr-breathe 4s ease-in-out infinite}
+
+/* cadre lumineux qui tourne */
+.mc .mc-qr-frame{position:relative;display:block;padding:4px;border-radius:1.5rem;
+  background:conic-gradient(from var(--mcqr-ang),var(--qr-a),var(--qr-b),var(--qr-c),var(--qr-a));
+  box-shadow:0 0 0 1px rgba(255,255,255,.15),0 18px 45px rgba(0,0,0,.28),0 0 40px var(--qr-glow);
+  animation:mcqr-spin 6s linear infinite;transition:box-shadow .4s}
+
+/* carte blanche : le QR reste parfaitement lisible */
+.mc .mc-qr-card{position:relative;display:block;line-height:0;padding:.75rem;background:#ffffff;border-radius:1.25rem;overflow:hidden;
+  box-shadow:inset 0 0 0 1px rgba(15,23,42,.06)}
+.mc .mc-qr-card img{display:block;width:10.5rem;height:10.5rem;max-width:100%;object-fit:contain;position:relative;z-index:0}
+
+/* faisceau de scan qui balaie le code */
+.mc .mc-qr-scan{position:absolute;left:0;right:0;top:0;height:28%;z-index:1;pointer-events:none;mix-blend-mode:multiply;
+  background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--qr-b) 22%,transparent) 85%,transparent);
+  border-bottom:2px solid color-mix(in srgb,var(--qr-b) 70%,transparent);
+  translate:0 -110%;animation:mcqr-scan 3.8s cubic-bezier(.6,0,.4,1) 1.2s infinite}
+
+/* reflet diagonal au survol */
+.mc .mc-qr-card::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.75) 50%,transparent 65%);translate:-120% 0}
+.mc a.mc-qr:hover .mc-qr-card::after{animation:mcqr-shine .9s ease}
+
+/* coins de visée qui respirent */
+.mc .mc-qr-corner{position:absolute;width:1.5rem;height:1.5rem;pointer-events:none;border:3px solid var(--qr-b);
+  filter:drop-shadow(0 0 6px var(--qr-glow));animation:mcqr-aim 2.6s ease-in-out infinite;transform:translateZ(30px)}
+.mc .mc-qr-corner.tl{top:-.85rem;left:-.85rem;border-right:0;border-bottom:0;border-top-left-radius:.6rem;border-color:var(--qr-a)}
+.mc .mc-qr-corner.tr{top:-.85rem;right:-.85rem;border-left:0;border-bottom:0;border-top-right-radius:.6rem;border-color:var(--qr-b)}
+.mc .mc-qr-corner.bl{bottom:-.85rem;left:-.85rem;border-right:0;border-top:0;border-bottom-left-radius:.6rem;border-color:var(--qr-c)}
+.mc .mc-qr-corner.br{bottom:-.85rem;right:-.85rem;border-left:0;border-top:0;border-bottom-right-radius:.6rem;border-color:var(--qr-a)}
+
+/* trois lucioles en orbite */
+.mc .mc-qr-orbit{position:absolute;inset:-1.6rem;pointer-events:none;border-radius:50%;animation:mcqr-rot 7s linear infinite}
+.mc .mc-qr-orbit:nth-of-type(2){inset:-2.2rem;animation-duration:10s;animation-direction:reverse}
+.mc .mc-qr-orbit:nth-of-type(3){inset:-1.2rem;animation-duration:13s}
+.mc .mc-qr-orbit i{position:absolute;top:0;left:50%;width:.55rem;height:.55rem;margin-left:-.275rem;border-radius:50%;
+  background:var(--c);box-shadow:0 0 10px 2px var(--c)}
+
+/* étiquette sous le QR */
+.mc .mc-qr-tag{position:relative;display:inline-flex;align-items:center;gap:.55rem;padding:.5rem 1.1rem;border-radius:99rem;
+  font-weight:700;font-size:1rem;line-height:1.3;white-space:normal;text-align:center;max-width:15rem;background:var(--qr-tag-bg);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:2px solid transparent;
+  background-image:linear-gradient(var(--qr-tag-bg),var(--qr-tag-bg)),conic-gradient(from var(--mcqr-ang),var(--qr-a),var(--qr-b),var(--qr-c),var(--qr-a));
+  background-origin:border-box;background-clip:padding-box,border-box;animation:mcqr-spin 6s linear infinite;
+  box-shadow:0 6px 20px rgba(0,0,0,.18)}
+.mc .mc-qr-heart{width:1.15em;height:1.15em;flex:none;color:var(--qr-heart);filter:drop-shadow(0 0 6px rgba(255,94,91,.6));animation:mcqr-beat 1.4s ease-in-out infinite}
+
+/* survol : le QR s'avance et s'illumine */
+.mc a.mc-qr:hover .mc-qr-frame{box-shadow:0 0 0 1px rgba(255,255,255,.25),0 26px 60px rgba(0,0,0,.35),0 0 70px var(--qr-glow)}
+.mc a.mc-qr:hover .mc-qr-scan{animation-play-state:paused;opacity:0}
+
+/* étincelles au clic */
+.mc .mc-qr-spark{position:absolute;left:50%;top:42%;width:.5rem;height:.5rem;border-radius:50%;pointer-events:none;z-index:5;
+  background:var(--c);box-shadow:0 0 8px var(--c);animation:mcqr-spark .9s ease-out forwards}
+
+/* entrée en scène, après le rideau d'intro */
+html.wow .mc .mc-qr{animation:mcqr-in 1.1s cubic-bezier(.2,1.3,.3,1) calc(var(--wb,0s) + 1.1s) both}
+
+@keyframes mcqr-spin{to{--mcqr-ang:360deg}}
+@keyframes mcqr-rot{to{rotate:360deg}}
+@keyframes mcqr-float{0%,100%{translate:0 0}50%{translate:0 -10px}}
+@keyframes mcqr-breathe{0%,100%{scale:.92}50%{scale:1.06}}
+@keyframes mcqr-scan{0%{translate:0 -110%}55%{translate:0 360%}100%{translate:0 360%}}
+@keyframes mcqr-shine{to{translate:120% 0}}
+@keyframes mcqr-aim{0%,100%{scale:1;opacity:1}50%{scale:.82;opacity:.65}}
+@keyframes mcqr-beat{0%,100%{scale:1}15%{scale:1.25}30%{scale:1}45%{scale:1.18}}
+@keyframes mcqr-spark{to{transform:translate(var(--x),var(--y)) scale(.2);opacity:0}}
+@keyframes mcqr-in{from{opacity:0;scale:.6;rotate:-8deg;filter:blur(12px)}to{opacity:1;scale:1;rotate:0deg;filter:none}}
+
+/* contraste renforcé ou maximal : sobriété et lisibilité avant tout */
+:root[data-mc-contrast] .mc .mc-qr-halo,:root[data-mc-contrast] .mc .mc-qr-scan,
+:root[data-mc-contrast] .mc .mc-qr-orbit,:root[data-mc-contrast] .mc .mc-qr-card::after{display:none}
+:root[data-mc-contrast] .mc .mc-qr-frame{background:var(--mc-text);box-shadow:none;animation:none}
+:root[data-mc-contrast] .mc .mc-qr-corner{border-color:var(--mc-text);filter:none}
+:root[data-mc-contrast] .mc .mc-qr-tag{background:var(--mc-surface);border-color:var(--mc-text);background-image:none;box-shadow:none;backdrop-filter:none}
+
+/* petits écrans : le QR passe sous les textes */
+@media (max-width:56rem){
+  .mc .mc-hero-txt.mc-qr-on{grid-template-columns:minmax(0,1fr)}
+  .mc .mc-qr{grid-column:1;grid-row:auto;margin-top:1.4rem}
+}
+@media (prefers-reduced-motion:reduce){
+  .mc .mc-qr,.mc .mc-qr *,.mc .mc-qr *::after{animation:none!important;transition:none!important}
+  .mc .mc-qr-tilt{transform:none!important}
+  .mc .mc-qr-scan,.mc .mc-qr-orbit{display:none}
+}
+@media print{.mc .mc-qr{display:none!important}}
+</style>
+<script>
+(function(){
+  "use strict";
+  var box=document.querySelector(".mc .mc-hero-txt");
+  if(!box||box.querySelector(".mc-qr"))return;
+  var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var fine=window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+  var a=document.createElement("a");
+  a.className="mc-qr";
+  a.href="https://ko-fi.com/ondeaweb";
+  a.target="_blank";
+  a.rel="noopener";
+  a.setAttribute("aria-label","Soutenir votre formateur sur Ko-fi (ouvre un nouvel onglet)");
+  a.innerHTML=
+    '<span class="mc-qr-tilt">'+
+      '<span class="mc-qr-halo" aria-hidden="true"></span>'+
+      '<span class="mc-qr-orbit" aria-hidden="true"><i style="--c:var(--mc-html)"></i></span>'+
+      '<span class="mc-qr-orbit" aria-hidden="true"><i style="--c:var(--mc-css)"></i></span>'+
+      '<span class="mc-qr-orbit" aria-hidden="true"><i style="--c:var(--mc-js)"></i></span>'+
+      '<span class="mc-qr-frame"><span class="mc-qr-card">'+
+        '<img src="qr-kofi.png" alt="QR code vers la page Ko-fi Ondea Web" width="192" height="192" decoding="async">'+
+        '<span class="mc-qr-scan" aria-hidden="true"></span>'+
+      '</span></span>'+
+      '<span class="mc-qr-corner tl" aria-hidden="true"></span><span class="mc-qr-corner tr" aria-hidden="true"></span>'+
+      '<span class="mc-qr-corner bl" aria-hidden="true"></span><span class="mc-qr-corner br" aria-hidden="true"></span>'+
+    '</span>'+
+    '<span class="mc-qr-tag"><svg class="mc-qr-heart" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.3 3 4.5 6.7 4.5c2.1 0 3.5 1.1 4.3 2.4.8-1.3 2.2-2.4 4.3-2.4 3.7 0 5.8 3.8 4.3 7.2C19.5 16.4 12 21 12 21z"/></svg>Scannez pour soutenir votre formateur</span>';
+  box.appendChild(a);
+  box.classList.add("mc-qr-on");
+
+  /* inclinaison 3D qui suit la souris */
+  var tilt=a.querySelector(".mc-qr-tilt");
+  if(fine&&!reduce&&tilt){
+    var raf=0,px=0,py=0;
+    a.addEventListener("pointermove",function(e){
+      var r=a.getBoundingClientRect();
+      px=(e.clientX-r.left)/r.width-.5; py=(e.clientY-r.top)/r.height-.5;
+      if(!raf)raf=requestAnimationFrame(function(){
+        raf=0;
+        tilt.style.setProperty("--ry",(px*18).toFixed(2)+"deg");
+        tilt.style.setProperty("--rx",(-py*18).toFixed(2)+"deg");
+      });
+    });
+    a.addEventListener("pointerleave",function(){
+      tilt.style.setProperty("--rx","0deg"); tilt.style.setProperty("--ry","0deg");
+    });
+  }
+
+  /* gerbe d'étincelles tricolores au clic */
+  a.addEventListener("click",function(){
+    if(reduce)return;
+    var cols=["var(--mc-html)","var(--mc-css)","var(--mc-js)","#ff5e5b"];
+    for(var k=0;k<20;k++){
+      var s=document.createElement("span"),an=Math.PI*2*k/20,d=90+Math.random()*60;
+      s.className="mc-qr-spark";
+      s.style.setProperty("--c",cols[k%4]);
+      s.style.setProperty("--x",(Math.cos(an)*d).toFixed(1)+"px");
+      s.style.setProperty("--y",(Math.sin(an)*d).toFixed(1)+"px");
+      a.appendChild(s);
+      setTimeout(function(el){el.remove();}.bind(null,s),950);
+    }
+  });
+})();
+</script>
+<!-- ===================== FIN AJOUT QR code Ko-fi « effet waouh » ===================== -->
+</body>
+</html>
